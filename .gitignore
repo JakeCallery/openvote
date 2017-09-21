@@ -1,0 +1,13 @@
+.idea
+node_modules
+*.pyc
+.vagrant
+/webclient/dist
+/webserver/views/dist
+*.avi
+*.ogg
+keys
+database
+certs
+*.retry
+dist

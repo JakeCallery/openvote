@@ -1,0 +1,16 @@
+{
+  "name": "openvote",
+  "version": "0.0.0",
+  "description": "janky quick voting system",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jake Callery",
+  "license": "",
+  "dependencies": {
+    "express": "4.15.4",
+    "path": "0.12.7",
+    "ws": "3.1.0"
+  }
+}
