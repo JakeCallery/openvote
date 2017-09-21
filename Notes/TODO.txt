@@ -1,0 +1,3 @@
+Create DB
+Implement basic DB connection
+Create SSL cert
