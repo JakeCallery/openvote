@@ -27,6 +27,10 @@ router.get('/', (req, res) => {
             } else {
                 console.error('INT overrun / vote count too big for topic: ' + topic.properties.topicId + ' / ' + topic.properties.topicName);
                 //TODO: Gracefully handle this issue on the client
+                resObj.status = 'ERROR';
+                resObj.error = 'Vote count for topic too high (int too big for JS)';
+                res.status(500).json(resObj);
+                return;
             }
 
             resObj.data.topics.push(
