@@ -9,18 +9,23 @@ router.post('/', (req, res) => {
 
     promiseRetry((retry, attempt) => {
         console.log('Cast Vote Attempt: ' + attempt);
-        return VoteManager.castVote()
+
+        //TODO: Sanitize req inputs
+        return VoteManager.castVote(req.body.topicId)
         .then(($dbResult) => {
             console.log('Cast Vote DBResult: ' + $dbResult);
 
             let vote = $dbResult.records[0].get('vote');
+            let topic = $dbResult.records[0].get('topic');
 
             let resObj = {
                 status:'SUCCESS'
             };
 
             resObj.data = {
-                voteId: vote.voteId
+                voteId: vote.properties.voteId,
+                topicId: topic.properties.topicId,
+                topicName: topic.properties.topicName
             };
 
             res.status(200).json(resObj);

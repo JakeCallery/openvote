@@ -32,18 +32,20 @@ export default class ApiTestUIManager extends EventDispatcher {
         this.createTopicButtonClickDelegate = EventUtils.bind(self, self.handleCreateTopicButtonClick);
         this.voteFortopicButtonClickDelegate = EventUtils.bind(self, self.handleVoteForTopicButtonClick);
         this.requestCreateTopicDelegate = EventUtils.bind(self, self.handleRequestCreateTopic);
+        this.requestCastVoteDelegate = EventUtils.bind(self, self.handleRequestCastVote);
 
         //Events
         this.createTopicButton.addEventListener('click', self.createTopicButtonClickDelegate);
         this.voteFortopicButton.addEventListener('click', self.voteFortopicButtonClickDelegate);
-        this.uigeb.addEventListener('requestCreateTopic', self.requestCreateTopicDelegate)
+        this.uigeb.addEventListener('requestCreateTopic', self.requestCreateTopicDelegate);
+        this.uigeb.addEventListener('requestCastVote', self.requestCastVoteDelegate);
     }
 
     handleCreateTopicButtonClick($evt){
         l.debug('Create Topic Click');
         $evt.target.disabled = true;
         this.uigeb.dispatchUIEvent('requestCreateTopic',
-            'test',
+            this.createTopicField.value,
             () => {
                 $evt.target.disabled = false;
             }
@@ -52,13 +54,43 @@ export default class ApiTestUIManager extends EventDispatcher {
 
     handleVoteForTopicButtonClick($evt){
         l.debug('Vote for topic click');
+        $evt.target.disabled = true;
+        this.uigeb.dispatchUIEvent('requestCastVote',
+            this.voteForTopicField.value,
+            () => {
+                $evt.target.disabled = false;
+            }
+        );
+    }
+
+    handleRequestCastVote($evt){
+        l.debug('Request Cast Vote');
+
+        //do fetch
+        let topicId = $evt.data;
+        l.debug('Topic Id: ', topicId);
+
+        this.requestManager.castVote({topicId:topicId})
+        .then(($response) => {
+            l.debug('Response: ', $response);
+            if($response.status === Status.SUCCESS) {
+                l.debug('Success');
+                this.uigeb.completeUIEvent($evt.id, $response);
+            } else {
+                l.debug('Failed');
+                this.uigeb.completeUIEvent($evt.id, $response);
+            }
+        })
+        .catch(($error) => {
+            this.uigeb.completeUIEvent($evt.id, $error);
+        });
     }
 
     handleRequestCreateTopic($evt){
         l.debug('Request Create Topic');
 
         //do fetch
-        let topicName = this.createTopicField.value;
+        let topicName = $evt.data;
         l.debug('Topic Name: ', topicName);
 
         this.requestManager.createTopic({topicName:topicName})

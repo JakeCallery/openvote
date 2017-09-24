@@ -6,19 +6,19 @@ class VoteManager {
 
     }
 
-    static castVote(){
+    static castVote($topicId){
         let session = db.session();
         let voteId = shortId.generate();
 
         return session
         .run(
-            'CREATE (' +
-            'vote:Vote {' +
-            'voteId:{voteId}' +
-            '}) ' +
-            'RETURN vote',
+            'MATCH (topic:Topic {topicId:{topicId}}) ' +
+            'CREATE (vote:Vote {voteId:{voteId}}), ' +
+            '(topic)-[:HAS_VOTE]->(vote) ' +
+            'RETURN vote, topic',
             {
-                voteId: voteId
+                voteId: voteId,
+                topicId: $topicId
             }
         )
         .then(($dbResult) => {
