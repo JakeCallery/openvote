@@ -12,6 +12,9 @@ const ejs = require('ejs');
 //Basic Pages
 const indexPage = require('./routes/indexPage');
 
+//Api
+const castVote = require('./routes/castVote');
+
 let connections = [];
 
 const server = http.createServer(app);
@@ -80,6 +83,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', indexPage);
 
 //API routes
+app.use('/api/castVote', castVote);
 
 //Static Serving
 app.use(express.static(path.join(__dirname, 'views/dist')));

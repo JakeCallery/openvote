@@ -5,6 +5,8 @@ import EventDispatcher from 'jac/events/EventDispatcher';
 import GlobalEventBus from 'jac/events/GlobalEventBus';
 import JacEvent from 'jac/events/JacEvent';
 import UIGEB from 'general/UIGEB';
+import RequestManager from 'RequestManager';
+import Status from 'general/Status';
 
 class UIManager extends EventDispatcher {
     constructor($doc){
@@ -13,6 +15,7 @@ class UIManager extends EventDispatcher {
         this.geb = new GlobalEventBus();
         this.uigeb = new UIGEB();
         this.doc = $doc;
+        this.requestManager = new RequestManager();
     }
 
     init(){
@@ -47,8 +50,18 @@ class UIManager extends EventDispatcher {
         l.debug('Request Create Vote');
 
         //do fetch
+        this.requestManager.castVote({})
+        .then(($response) => {
+            l.debug('Response: ', $response);
+            if($response.status === Status.SUCCESS) {
+                this.uigeb.completeUIEvent($evt.id, $response);
+            }
+        })
+        .catch(($error) => {
+            this.uigeb.completeUIEvent($evt.id, $error);
+        });
 
-        this.uigeb.completeUIEvent($evt.id, "success");
+
     }
 }
 
