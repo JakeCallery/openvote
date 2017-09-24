@@ -78,7 +78,7 @@ module.exports = {
             template: 'html/apiTest.html',
             hash: true,
             chunks: [
-                'apitestEntry'
+                'apiTestEntry'
             ]
         }),
 /*

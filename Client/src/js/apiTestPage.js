@@ -5,6 +5,7 @@ import LogLevel from 'jac/logger/LogLevel';
 import ConsoleTarget from 'jac/logger/ConsoleTarget';
 import GlobalEventBus from 'jac/events/GlobalEventBus';
 import ReadyManager from 'ready/ReadyManager';
+import ApiTestUIManager from 'ApiTestUIManager'
 
 //Import through loaders
 import '../css/normalize.css';
@@ -22,12 +23,8 @@ readyManager.ready()
         let geb = new GlobalEventBus();
 
         //Start App Here
-        //let uiManager = new UIManager(document);
-        //uiManager.init();
-
-        //let wsManager = new WSManager();
-        //wsManager.init();
-
+        let uiManager = new ApiTestUIManager(document);
+        uiManager.init();
     })
     .catch(($error) => {
         l.error('Ready ERROR: ', $error);
