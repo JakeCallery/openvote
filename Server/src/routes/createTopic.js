@@ -20,8 +20,8 @@ router.post('/', (req, res) => {
             };
 
             resObj.data = {
-                topicId: topic.topicId,
-                topicName: topic.topicName
+                topicId: topic.properties.topicId,
+                topicName: topic.properties.topicName
             };
 
             res.status(200).json(resObj);
