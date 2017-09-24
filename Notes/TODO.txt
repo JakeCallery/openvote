@@ -1,5 +1,6 @@
 Create new topic
 Vote on topic
+Add first vote on topic creation
 Client Notification (sockets) on new vote
 Create SSL cert
 Create Constraints on DB (no duplicate topic/vote id's etc..)

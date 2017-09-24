@@ -12,6 +12,33 @@ export default class RequestManager extends EventDispatcher {
         this.geb = new GlobalEventBus();
     }
 
+    getTopics() {
+        return new Promise((resolve, reject) => {
+            fetch('/api/getTopics', {
+                method: 'GET',
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                })
+            })
+            .then(($response) => {
+                return $response.json()
+            })
+            .then(($res) => {
+                l.debug('Response: ', $res);
+                resolve({
+                    status:$res.status
+                });
+            })
+            .catch(($error) => {
+                l.debug('Get Topics Error: ', $error);
+                reject({
+                    status: Status.ERROR,
+                    data: $error
+                });
+            })
+        });
+    }
+
     castVote($voteData) {
         return new Promise((resolve, reject) => {
            fetch('/api/castVote', {

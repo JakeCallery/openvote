@@ -27,18 +27,54 @@ export default class ApiTestUIManager extends EventDispatcher {
         this.createTopicButton = this.doc.getElementById('createTopicButton');
         this.voteForTopicField = this.doc.getElementById('voteForTopicIdField');
         this.voteFortopicButton = this.doc.getElementById('voteForTopicButton');
+        this.getTopicsButton = this.doc.getElementById('getTopics');
 
         //Delegates
         this.createTopicButtonClickDelegate = EventUtils.bind(self, self.handleCreateTopicButtonClick);
         this.voteFortopicButtonClickDelegate = EventUtils.bind(self, self.handleVoteForTopicButtonClick);
         this.requestCreateTopicDelegate = EventUtils.bind(self, self.handleRequestCreateTopic);
         this.requestCastVoteDelegate = EventUtils.bind(self, self.handleRequestCastVote);
+        this.getTopicsButtonClickDelegate = EventUtils.bind(self, self.handleGetTopicsButtonClick);
+        this.requestGetTopicsDelegate = EventUtils.bind(self, self.handleRequestGetTopics);
 
         //Events
         this.createTopicButton.addEventListener('click', self.createTopicButtonClickDelegate);
         this.voteFortopicButton.addEventListener('click', self.voteFortopicButtonClickDelegate);
+        this.getTopicsButton.addEventListener('click', self.getTopicsButtonClickDelegate);
         this.uigeb.addEventListener('requestCreateTopic', self.requestCreateTopicDelegate);
         this.uigeb.addEventListener('requestCastVote', self.requestCastVoteDelegate);
+        this.uigeb.addEventListener('requestGetTopics', self.requestGetTopicsDelegate);
+    }
+
+    handleGetTopicsButtonClick($evt){
+        l.debug('Caught Get Topics Click');
+        $evt.target.disabled = true;
+        this.uigeb.dispatchUIEvent('requestGetTopics',
+            this.createTopicField.value,
+            () => {
+                $evt.target.disabled = false;
+            }
+        );
+    }
+
+    handleRequestGetTopics($evt){
+        l.debug('Caught Request Get Topics');
+
+        //do fetch
+        this.requestManager.getTopics()
+        .then(($response) => {
+            l.debug('Response: ', $response);
+            if($response.status === Status.SUCCESS) {
+                l.debug('Success');
+                this.uigeb.completeUIEvent($evt.id, $response);
+            } else {
+                l.debug('Failed');
+                this.uigeb.completeUIEvent($evt.id, $response);
+            }
+        })
+        .catch(($error) => {
+            this.uigeb.completeUIEvent($evt.id, $error);
+        });
     }
 
     handleCreateTopicButtonClick($evt){

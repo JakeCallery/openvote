@@ -6,6 +6,30 @@ class TopicManager {
 
     }
 
+    static getTopics() {
+        let session = db.session();
+
+        return session
+        .run(
+            'MATCH (topic:Topic)-[:HAS_VOTE]->(vote:Vote) ' +
+            'WITH topic,count(vote) as voteCount ' +
+            'RETURN topic, voteCount'
+        )
+        .then(($dbResult) => {
+            session.close();
+            return new Promise((resolve, reject) => {
+                resolve($dbResult);
+            });
+        })
+        .catch(($error) => {
+            session.close();
+            return new Promise((resolve, reject) => {
+                console.error('Get Topics Error: ', $error);
+                reject($error);
+            });
+        });
+    }
+
     static createTopic($topicName) {
         let session = db.session();
         let topicId = shortId.generate();

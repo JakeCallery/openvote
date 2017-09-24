@@ -18,6 +18,7 @@ const apiTestPage = require('./routes/apiTestPage');
 //Api
 const castVote = require('./routes/castVote');
 const createTopic = require('./routes/createTopic');
+const getTopics = require('./routes/getTopics');
 
 const server = http.createServer(app);
 
@@ -47,6 +48,7 @@ app.use('/apiTestPage', apiTestPage);
 //API routes
 app.use('/api/castVote', castVote);
 app.use('/api/createTopic', createTopic);
+app.use('/api/getTopics', getTopics);
 
 //Static Serving
 app.use(express.static(path.join(__dirname, 'views/dist')));
