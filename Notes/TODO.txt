@@ -1,3 +1,6 @@
+Client Notification (sockets) on new vote
+Create SSL cert
+
+--- DONE ---
 Create DB
 Implement basic DB connection
-Create SSL cert
