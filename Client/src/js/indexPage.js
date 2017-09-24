@@ -7,6 +7,7 @@ import JacEvent from 'jac/events/JacEvent';
 import GlobalEventBus from 'jac/events/GlobalEventBus';
 import WSManager from 'WSManager';
 import ReadyManager from 'ready/ReadyManager';
+import UIManager from 'UIManager';
 
 //Import through loaders
 import '../css/normalize.css';
@@ -24,7 +25,8 @@ readyManager.ready()
     let geb = new GlobalEventBus();
 
     //Start App Here
-    //UIManager
+    let uiManager = new UIManager(document);
+    uiManager.init();
 
     let wsManager = new WSManager();
     wsManager.init();

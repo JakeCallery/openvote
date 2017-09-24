@@ -3,13 +3,16 @@ const path = require('path');
 const url = require('url');
 const express = require('express');
 const WebSocket = require('ws');
-
+const db = require('./config/db');
 const app = express();
+const logger = require('morgan');
+const bodyParser = require('body-parser');
+const ejs = require('ejs');
+
+//Basic Pages
+const indexPage = require('./routes/indexPage');
 
 let connections = [];
-
-app.use('/', express.static('../../dist'));
-
 
 const server = http.createServer(app);
 
@@ -64,3 +67,19 @@ server.listen(8888, () => {
     console.log('Listening on %d', server.address().port);
 });
 
+//Server Setup
+app.use(logger('dev'));
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'html');
+app.set('trust proxy', 1);
+app.engine('html', ejs.renderFile);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+//Page routes
+app.use('/', indexPage);
+
+//API routes
+
+//Static Serving
+app.use(express.static(path.join(__dirname, 'views/dist')));
