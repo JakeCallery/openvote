@@ -17,8 +17,6 @@ const indexPage = require('./routes/indexPage');
 //Api
 const castVote = require('./routes/castVote');
 
-
-
 const server = http.createServer(app);
 
 const wss = new WebSocket.Server({

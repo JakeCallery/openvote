@@ -43,25 +43,14 @@ class WSManager extends EventDispatcher {
         };
 
         self.connection.onmessage = ($evt) => {
-            l.debug('Caught Message from Server');
+            l.debug('Caught Message from Server: ', $evt.data);
             let obj = JSON.parse($evt.data);
-
-            if(obj.type) {
-                if(obj.type === 'text') {
-                    l.debug('Message: ', obj.data);
-                } else if (obj.type === 'img') {
-                    l.debug('Image: ');
-                    this.geb.dispatchEvent(new JacEvent('newimagebase64data', obj.data));
-                } else {
-                    l.error('Bad Type: ', obj.type);
-                }
-            } else {
-                l.error('Bad data, missing "type" property');
-            }
+            l.debug('Message: ', obj);
         };
 
     }
 
+/*
     handleSendImageRequest($evt) {
         let self = this;
 
@@ -84,6 +73,7 @@ class WSManager extends EventDispatcher {
         };
         self.connection.send(JSON.stringify(textDataObj));
     }
+*/
 }
 
 export default WSManager;

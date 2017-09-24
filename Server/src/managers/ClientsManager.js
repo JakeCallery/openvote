@@ -16,17 +16,20 @@ class ClientsManager {
             console.log((new Date()) + ' Connection accepted: ' + $req.connection.remoteAddress);
             this.clientList.push($connection);
 
-            $connection.on('message', ($msg) => {
-                let msgType = typeof $msg;
-                console.log('Sending message of Type: ', msgType);
-
-                //Send message to other clients
-                for(let i = 0; i < this.clientList.length; i++){
-                    let conn = this.clientList[i];
-                    if(conn !== $connection) {
-                        conn.send($msg);
-                    }
+            let joinMsg = {
+                msgType:'connection',
+                status:'connected',
+                data:{
+                    id:'testid'
                 }
+            };
+
+            this.sendMessage($connection, joinMsg);
+
+            $connection.on('message', ($msg) => {
+                console.log('Raw Message: ', $msg);
+
+
                 //console.log('Message: ', $msg);
             });
 
@@ -47,6 +50,18 @@ class ClientsManager {
 
         });
 
+    }
+
+    sendMessage($sourceConnection, $dataObj){
+        //Send message to other clients
+        console.log('Sending: ', JSON.stringify($dataObj));
+
+        for(let i = 0; i < this.clientList.length; i++){
+            let conn = this.clientList[i];
+            if(conn !== $sourceConnection) {
+                conn.send(JSON.stringify($dataObj));
+            }
+        }
     }
 }
 
