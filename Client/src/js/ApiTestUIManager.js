@@ -23,25 +23,57 @@ export default class ApiTestUIManager extends EventDispatcher {
         let self = this;
 
         //DOM Elements
-        self.createTopicField = this.doc.getElementById('createTopicField');
-        self.createTopicButton = this.doc.getElementById('createTopicButton');
-        self.voteForTopicField = this.doc.getElementById('voteForTopicIdField');
-        self.voteFortopicButton = this.doc.getElementById('voteForTopicButton');
+        this.createTopicField = this.doc.getElementById('createTopicField');
+        this.createTopicButton = this.doc.getElementById('createTopicButton');
+        this.voteForTopicField = this.doc.getElementById('voteForTopicIdField');
+        this.voteFortopicButton = this.doc.getElementById('voteForTopicButton');
 
         //Delegates
-        self.createTopicButtonClickDelegate = EventUtils.bind(self, self.handleCreateTopicButtonClick);
-        self.voteFortopicButtonClickDelegate = EventUtils.bind(self, self.handleVoteForTopicButtonClick);
+        this.createTopicButtonClickDelegate = EventUtils.bind(self, self.handleCreateTopicButtonClick);
+        this.voteFortopicButtonClickDelegate = EventUtils.bind(self, self.handleVoteForTopicButtonClick);
+        this.requestCreateTopicDelegate = EventUtils.bind(self, self.handleRequestCreateTopic);
 
         //Events
-        self.createTopicButton.addEventListener('click', self.createTopicButtonClickDelegate);
-        self.voteFortopicButton.addEventListener('click', self.voteFortopicButtonClickDelegate);
+        this.createTopicButton.addEventListener('click', self.createTopicButtonClickDelegate);
+        this.voteFortopicButton.addEventListener('click', self.voteFortopicButtonClickDelegate);
+        this.uigeb.addEventListener('requestCreateTopic', self.requestCreateTopicDelegate)
     }
 
     handleCreateTopicButtonClick($evt){
         l.debug('Create Topic Click');
+        $evt.target.disabled = true;
+        this.uigeb.dispatchUIEvent('requestCreateTopic',
+            'test',
+            () => {
+                $evt.target.disabled = false;
+            }
+        );
     }
 
     handleVoteForTopicButtonClick($evt){
         l.debug('Vote for topic click');
+    }
+
+    handleRequestCreateTopic($evt){
+        l.debug('Request Create Topic');
+
+        //do fetch
+        let topicName = this.createTopicField.value;
+        l.debug('Topic Name: ', topicName);
+
+        this.requestManager.createTopic({topicName:topicName})
+        .then(($response) => {
+            l.debug('Response: ', $response);
+            if($response.status === Status.SUCCESS) {
+                l.debug('Success');
+                this.uigeb.completeUIEvent($evt.id, $response);
+            } else {
+                l.debug('Failed');
+                this.uigeb.completeUIEvent($evt.id, $response);
+            }
+        })
+        .catch(($error) => {
+            this.uigeb.completeUIEvent($evt.id, $error);
+        });
     }
 }

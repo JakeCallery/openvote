@@ -47,3 +47,5 @@ class TopicManager {
     }
 
 }
+
+module.exports = TopicManager;

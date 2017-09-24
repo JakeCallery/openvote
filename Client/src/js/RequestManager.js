@@ -39,4 +39,32 @@ export default class RequestManager extends EventDispatcher {
            });
         });
     }
+
+    createTopic($topicData) {
+        return new Promise((resolve, reject) => {
+            fetch('/api/createTopic', {
+                method: 'POST',
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                }),
+                body: JSON.stringify($topicData)
+            })
+                .then(($response) => {
+                    return $response.json()
+                })
+                .then(($res) => {
+                    l.debug('Response: ', $res);
+                    resolve({
+                        status:$res.status
+                    });
+                })
+                .catch(($error) => {
+                    l.debug('Create Topic: ', $error);
+                    reject({
+                        status: Status.ERROR,
+                        data: $error
+                    });
+                });
+        });
+    }
 }
