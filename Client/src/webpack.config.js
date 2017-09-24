@@ -8,7 +8,8 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
     entry: {
-        indexEntry:'./js/indexPage.js'
+        indexEntry:'./js/indexPage.js',
+        apiTestEntry:'./js/apiTestPage.js'
     },
 
     output: {
@@ -70,6 +71,14 @@ module.exports = {
             hash: false,
             chunks: [
                 'indexEntry'
+            ]
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'apiTest.html',
+            template: 'html/apiTest.html',
+            hash: true,
+            chunks: [
+                'apitestEntry'
             ]
         }),
 /*

@@ -13,6 +13,7 @@ const ejs = require('ejs');
 
 //Basic Pages
 const indexPage = require('./routes/indexPage');
+const apiTestPage = require('./routes/apiTestPage');
 
 //Api
 const castVote = require('./routes/castVote');
@@ -40,6 +41,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 //Page routes
 app.use('/', indexPage);
+app.use('/apiTestPage', apiTestPage);
 
 //API routes
 app.use('/api/castVote', castVote);
