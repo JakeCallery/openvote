@@ -2,9 +2,14 @@ const express = require('express');
 const router = express.Router();
 const TopicManager = require('../managers/TopicManager');
 const neo4j = require('neo4j-driver').v1;
+const User = require('../models/User');
 
 router.get('/', (req, res) => {
     console.log('Caught Get Topics');
+
+    let user = req.ovdata.sessionUser;
+
+    console.log('User from Session: ', user);
 
     TopicManager.getTopics()
     .then(($dbResult) => {

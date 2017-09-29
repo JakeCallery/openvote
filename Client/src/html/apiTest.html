@@ -7,6 +7,12 @@
 <body>
     API Test Page
 
+    <% if (isLoggedIn) { %>
+        <button>Logout</button>
+    <% } else { %>
+        <a href="/auth/google">Google Login</a>
+    <% } %>
+
     <p>
         Create Topic: <br>
         <input type="text" id="createTopicField"><br>

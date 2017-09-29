@@ -1,3 +1,6 @@
+User Login (verify ansys.com user)
+Create Google App credentials (for google login)
+
 Client Notification (sockets) on new vote
 Create SSL cert
 Create Constraints on DB (no duplicate topic/vote id's etc..)
