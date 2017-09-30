@@ -23,19 +23,68 @@ class UIManager extends EventDispatcher {
         let self = this;
 
         //DOM Elements
-        self.createVoteButton = this.doc.getElementById('createVoteButton');
+        this.graphContainerDiv = this.doc.getElementById('graphContainerDiv');
+        this.graphUl = this.doc.getElementById('graphUl');
 
         //Delegates
-        self.createVoteClickDelegate = EventUtils.bind(self, self.handleCreateVoteClick);
-        self.requestCreateVoteDelegate = EventUtils.bind(self, self.handleRequestCreateVote);
+        this.createVoteClickDelegate = EventUtils.bind(self, self.handleCreateVoteClick);
+        this.requestCreateVoteDelegate = EventUtils.bind(self, self.handleRequestCreateVote);
 
         //Events
-        self.createVoteButton.addEventListener('click', self.createVoteClickDelegate);
-        this.uigeb.addEventListener('requestCreateVote', self.requestCreateVoteDelegate)
-
-
+        this.uigeb.addEventListener('requestCreateVote', self.requestCreateVoteDelegate);
     }
 
+    createGraph($topicList){
+        l.debug('Create Graph UI Topic Data: ', $topicList);
+
+        this.clearGraphContainer();
+
+        for(let i = 0; i < $topicList.length; i++){
+            let li = this.createTopicRow($topicList[i]);
+            this.graphUl.appendChild(li);
+        }
+    }
+
+    createTopicRow($topic){
+        let li = this.doc.createElement('li');
+        DOMUtils.addClass(li, 'graphLi');
+
+        let topicTitleP = this.doc.createElement('p');
+        DOMUtils.addClass(topicTitleP, 'topicTitleP');
+        topicTitleP.innerHTML = $topic.topicName;
+
+        let progressBarDiv = this.doc.createElement('div');
+        DOMUtils.addClass(progressBarDiv, 'progressBarDiv');
+        let progressBarTrack = this.doc.createElement('div');
+        DOMUtils.addClass(progressBarTrack, 'progressBarTrack');
+        let progressBarFill = this.doc.createElement('div');
+        DOMUtils.addClass(progressBarFill, 'progressBarFill');
+        let progressBarSpan = this.doc.createElement('span');
+        DOMUtils.addClass(progressBarSpan, 'progressBarSpan');
+        progressBarSpan.innerHTML = '200';
+
+        progressBarFill.appendChild(progressBarSpan);
+        progressBarTrack.appendChild(progressBarFill);
+        progressBarDiv.appendChild(progressBarTrack);
+
+        //Final Assembly
+        li.appendChild(topicTitleP);
+        li.appendChild(progressBarDiv);
+
+        return li;
+    }
+
+    clearGraphContainer(){
+        //TODO: Proper JS clean up
+        l.debug('Clear graph UL');
+        let numChildNodes = this.graphUl.childNodes.length;
+        for(let i = numChildNodes-1; i >= 0; i--){
+            let node = this.graphUl.childNodes[i];
+            this.graphUl.removeChild(node);
+        }
+    }
+
+/*
     handleCreateVoteClick($evt){
         l.debug('Create Vote Click');
         $evt.target.disabled = true;
@@ -61,8 +110,9 @@ class UIManager extends EventDispatcher {
             this.uigeb.completeUIEvent($evt.id, $error);
         });
 
-
     }
+*/
+
 }
 
 export default UIManager;

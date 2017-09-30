@@ -9,6 +9,11 @@ html, body {
     background-color: #FFFFFF;
 }
 
+p {
+    padding: 0;
+    margin: 0;
+}
+
 body {
     box-sizing: border-box;
 }
@@ -31,14 +36,6 @@ body {
 
 button {
     cursor: pointer;
-}
-
-.addScoreButton {
-    margin-top: 0.2em;
-}
-
-.addTextScoreButton {
-    margin-top: 0;
 }
 
 .simpleButton {
@@ -68,6 +65,60 @@ button {
     cursor: default;
 }
 
-.pasteCanvas {
-    background-color: #222222;
+.pageHeaderDiv {
+    width: 100%;
+}
+
+.pageHeaderDiv > h1 {
+    text-align: center;
+}
+
+.graphContainerDiv {
+    width: 100%;
+}
+
+.graphUl {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.graphLi {
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    flex-flow: nowrap;
+}
+
+.topicTitleDiv {
+    background-color: aqua;
+    flex-grow: 1;
+}
+
+.topicTitleP {
+    background-color: blueviolet;
+    width: 30%;
+}
+
+.progressBarDiv {
+    height: 50px;
+    width: 70%;
+}
+
+.progressBarTrack {
+    height: 50px;
+    background: #0b2880;
+}
+
+.progressBarFill {
+    background: #666;
+    height:50px;
+    width: 50%;
+    text-align: center;
+    font-size: 12px;
+    line-height: 50px;
+}
+
+.progressBarSpan {
+
 }

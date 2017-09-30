@@ -8,6 +8,8 @@ import GlobalEventBus from 'jac/events/GlobalEventBus';
 import WSManager from 'WSManager';
 import ReadyManager from 'ready/ReadyManager';
 import UIManager from 'UIManager';
+import RequestManager from "./RequestManager";
+import Status from 'general/Status';
 
 //Import through loaders
 import '../css/normalize.css';
@@ -30,6 +32,32 @@ readyManager.ready()
 
     let wsManager = new WSManager();
     wsManager.init();
+
+    let requestManager = new RequestManager();
+
+    //Events
+    geb.addEventListener('requestnewtopicdata', ($evt) => {
+        requestManager.getTopics()
+        .then(($response) => {
+            if($response.status === Status.SUCCESS) {
+                l.debug('Get Topics Success: ', $response);
+                geb.dispatchEvent(new JacEvent('newtopicdata', $response.data));
+            } else {
+                l.debug('Get Topics Failed: ', $response);
+            }
+        })
+        .catch(($error) => {
+            l.debug('Get Topics Failed: ', $error);
+        });
+    });
+
+    geb.addEventListener('newtopicdata', ($evt) => {
+        l.debug('New Topic Data: ', $evt.data);
+        uiManager.createGraph($evt.data.topics);
+    });
+
+    //Kick off
+    geb.dispatchEvent(new JacEvent('requestnewtopicdata'));
 
 })
 .catch(($error) => {
