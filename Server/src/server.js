@@ -72,7 +72,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', indexPage);
 app.use('/apiTestPage', apiTestPage);
 app.use('/notAuthorized', notAuthorizedPage);
-app.use('/login', loginPage);
 
 //Auth Routes
 app.use('/auth/google', authGoogle);

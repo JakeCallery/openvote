@@ -14,6 +14,8 @@ router.get('/', (req, res) => {
         //Just redirect to root
         res.redirect('/');
     } else {
+        res.clearCookie('session');
+        res.clearCookie('session.sig');
         res.render('dist/login', {
             title: 'OpenVote Login'
         });

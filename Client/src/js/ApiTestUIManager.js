@@ -28,6 +28,7 @@ export default class ApiTestUIManager extends EventDispatcher {
         this.voteForTopicField = this.doc.getElementById('voteForTopicIdField');
         this.voteFortopicButton = this.doc.getElementById('voteForTopicButton');
         this.getTopicsButton = this.doc.getElementById('getTopics');
+        this.logoutButton = this.doc.getElementById('logoutButton');
 
         //Delegates
         this.createTopicButtonClickDelegate = EventUtils.bind(self, self.handleCreateTopicButtonClick);
@@ -36,6 +37,7 @@ export default class ApiTestUIManager extends EventDispatcher {
         this.requestCastVoteDelegate = EventUtils.bind(self, self.handleRequestCastVote);
         this.getTopicsButtonClickDelegate = EventUtils.bind(self, self.handleGetTopicsButtonClick);
         this.requestGetTopicsDelegate = EventUtils.bind(self, self.handleRequestGetTopics);
+        this.logoutButtonClickDelegate = EventUtils.bind(self, self.handleLogoutButtonClick);
 
         //Events
         this.createTopicButton.addEventListener('click', self.createTopicButtonClickDelegate);
@@ -44,6 +46,12 @@ export default class ApiTestUIManager extends EventDispatcher {
         this.uigeb.addEventListener('requestCreateTopic', self.requestCreateTopicDelegate);
         this.uigeb.addEventListener('requestCastVote', self.requestCastVoteDelegate);
         this.uigeb.addEventListener('requestGetTopics', self.requestGetTopicsDelegate);
+        this.logoutButton.addEventListener('click', self.logoutButtonClickDelegate);
+    }
+
+    handleLogoutButtonClick($evt){
+        l.debug('Caught Logout Click');
+        window.location = '/logout';
     }
 
     handleGetTopicsButtonClick($evt){

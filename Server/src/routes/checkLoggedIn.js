@@ -15,6 +15,7 @@ router.all('/', (req, res, next) => {
             error:'NOT_LOGGED_IN',
             status:'ERROR'
         };
+        console.log('Bad Login Data');
         req.logout();
         res.clearCookie('session');
         res.clearCookie('session.sig');
