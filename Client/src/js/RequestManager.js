@@ -16,6 +16,7 @@ export default class RequestManager extends EventDispatcher {
         return new Promise((resolve, reject) => {
             fetch('/api/getTopics', {
                 method: 'GET',
+                credentials: 'include',
                 headers: new Headers({
                     'Content-Type': 'application/json'
                 })
@@ -43,6 +44,7 @@ export default class RequestManager extends EventDispatcher {
         return new Promise((resolve, reject) => {
            fetch('/api/castVote', {
                method: 'POST',
+               credentials: 'include',
                headers: new Headers({
                    'Content-Type': 'application/json'
                }),
@@ -71,28 +73,29 @@ export default class RequestManager extends EventDispatcher {
         return new Promise((resolve, reject) => {
             fetch('/api/createTopic', {
                 method: 'POST',
+                credentials: 'include',
                 headers: new Headers({
                     'Content-Type': 'application/json'
                 }),
                 body: JSON.stringify($topicData)
             })
-                .then(($response) => {
-                    return $response.json()
-                })
-                .then(($res) => {
-                    l.debug('JSON Response: ', $res);
-                    resolve({
-                        status:$res.status,
-                        data:$res.data
-                    });
-                })
-                .catch(($error) => {
-                    l.debug('Create Topic: ', $error);
-                    reject({
-                        status: Status.ERROR,
-                        data: $error
-                    });
+            .then(($response) => {
+                return $response.json()
+            })
+            .then(($res) => {
+                l.debug('JSON Response: ', $res);
+                resolve({
+                    status:$res.status,
+                    data:$res.data
                 });
+            })
+            .catch(($error) => {
+                l.debug('Create Topic: ', $error);
+                reject({
+                    status: Status.ERROR,
+                    data: $error
+                });
+            });
         });
     }
 }

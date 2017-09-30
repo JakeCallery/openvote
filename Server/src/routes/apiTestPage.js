@@ -11,6 +11,8 @@ router.get('/', function (req, res) {
     if(!isLoggedIn || !req.user.email) {
         res.redirect('/login');
     } else if(!req.user.email.endsWith('@ansys.com')) {
+        res.clearCookie('session');
+        res.clearCookie('session.sig');
         res.redirect('/notAuthorized');
     } else {
         res.render('dist/apiTest', {
