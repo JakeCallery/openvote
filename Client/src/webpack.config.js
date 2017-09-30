@@ -9,7 +9,8 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = {
     entry: {
         indexEntry:'./js/indexPage.js',
-        apiTestEntry:'./js/apiTestPage.js'
+        apiTestEntry:'./js/apiTestPage.js',
+        loginEntry:'./js/loginPage.js'
     },
 
     output: {
@@ -81,7 +82,23 @@ module.exports = {
                 'apiTestEntry'
             ]
         }),
-/*
+        new HtmlWebpackPlugin({
+            filename: 'notAuthorized.html',
+            template: 'html/notAuthorized.html',
+            hash: true,
+            chunks: [
+                //'apiTestEntry'
+            ]
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'login.html',
+            template: 'html/login.html',
+            hash: true,
+            chunks: [
+                'loginEntry'
+            ]
+        }),
+        /*
         new ImageminPlugin({
 
         }),

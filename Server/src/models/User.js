@@ -34,6 +34,7 @@ class User {
         this.data.lastName = $idObj.lastName;
         this.data.profileImg = $idObj.profileImg;
         this.data.name = $idObj.name;
+        this.data.email = $idObj.email;
 
         this.authType = 'google';
         this.data.google = {};
@@ -100,28 +101,15 @@ class User {
         if ($idObj.hasOwnProperty('google')) {
             console.log('Checking Email address: ' + $idObj.google.email);
             return new Promise((resolve, reject) => {
-                if ($idObj.google.email.endsWith('@ansys.com')) {
-                    let newUser = new User();
-                    resolve(newUser);
-                } else {
-                    reject('NOT_AUTHORIZED');
-                }
-
+                let newUser = new User();
+                newUser.updateFromGoogleIdObj($idObj.google);
+                resolve(newUser);
             });
         } else {
             //Bad login ID type
             console.error('Bad ID Type');
             throw new Error('Bad ID Type');
         }
-    }
-
-    static findById($userId) {
-        console.log('Find By ID: ', $userId);
-        //Not storing any user data, s "create" new every time
-        return new Promise((resolve, reject) => {
-            console.log('Always a new user (returning null)');
-            resolve(null);
-        })
     }
 }
 

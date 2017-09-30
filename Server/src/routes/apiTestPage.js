@@ -8,10 +8,16 @@ router.get('/', function (req, res) {
     let isLoggedIn = (typeof(req.user) !== 'undefined');
     console.log('Logged In: ', isLoggedIn);
 
-    res.render('dist/apiTest', {
-        title: 'ApiTestPage',
-        isLoggedIn: isLoggedIn
-    });
+    if(!isLoggedIn || !req.user.email) {
+        res.redirect('/login');
+    } else if(!req.user.email.endsWith('@ansys.com')) {
+        res.redirect('/notAuthorized');
+    } else {
+        res.render('dist/apiTest', {
+            title: 'ApiTestPage',
+            isLoggedIn: isLoggedIn
+        });
+    }
 });
 
 module.exports = router;

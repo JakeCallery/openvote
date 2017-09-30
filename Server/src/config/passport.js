@@ -41,6 +41,7 @@ module.exports = function(passport){
                         provider: profile.provider
                     }
                 };
+
                 promiseRetry((retry, attempt) => {
                     console.log('findOrCreate Attempt: ' + attempt);
                     User.findOrCreate(idObj)
@@ -49,12 +50,7 @@ module.exports = function(passport){
                         done(null, user);
                     })
                     .catch(($error) => {
-                        if ($error == 'NOT_AUTHORIZED'){
-                            console.log('-- NOT ANSYS ADDRESS --');
-                            console.error('Error: ', $error);
-                            done(null,false);
-                        }
-                        else if($error.fields[0].code == 'Neo.ClientError.Schema.ConstraintValidationFailed'){
+                      if($error.fields[0].code == 'Neo.ClientError.Schema.ConstraintValidationFailed'){
                             console.log('Will retry');
                             retry('Create User Duplicate Id');
                         } else {

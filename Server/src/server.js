@@ -37,6 +37,8 @@ const authGoogleCallback = require('./routes/authGoogleCallback');
 //Basic Pages
 const indexPage = require('./routes/indexPage');
 const apiTestPage = require('./routes/apiTestPage');
+const notAuthorizedPage = require('./routes/notAuthorizedPage');
+const loginPage = require('./routes/loginPage');
 
 //Api
 const castVote = require('./routes/castVote');
@@ -69,6 +71,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //Page routes
 app.use('/', indexPage);
 app.use('/apiTestPage', apiTestPage);
+app.use('/notAuthorized', notAuthorizedPage);
+app.use('/login', loginPage);
 
 //Auth Routes
 app.use('/auth/google', authGoogle);
