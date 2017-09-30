@@ -38,7 +38,6 @@ const authGoogleCallback = require('./routes/authGoogleCallback');
 const indexPage = require('./routes/indexPage');
 const apiTestPage = require('./routes/apiTestPage');
 const notAuthorizedPage = require('./routes/notAuthorizedPage');
-const loginPage = require('./routes/loginPage');
 
 //Api
 const castVote = require('./routes/castVote');
@@ -49,6 +48,7 @@ const checkLoggedIn = require('./routes/checkLoggedIn');
 //Setup server
 const server = http.createServer(app);
 
+//Setup socket server
 const wss = new WebSocket.Server({
     server:server
 });
