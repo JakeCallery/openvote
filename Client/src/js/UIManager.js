@@ -51,8 +51,16 @@ class UIManager extends EventDispatcher {
             let topicUI = this.findTopicUI(topic.topicId);
             if(topicUI !== null){
                 //Compare and update stats
-                //TODO: Do actual compare, so as not to update ALL UI items for no reason
-                this.updateTopicRowUI(topic);
+                if(
+                    topicUI.getVoteCountFromUI() !== topic.voteCount ||
+                    topicUI.getCountPercentageFromUI() !== topic.countPercent
+                ) {
+                    l.debug('Updating UI');
+                    this.updateTopicRowUI(topic);
+                } else {
+                    l.debug('Skipping UI Update');
+                }
+
             } else {
                 //create new topic
                 l.debug('Creating new topic UI: ' + topic.topicId);
@@ -161,6 +169,15 @@ class UIManager extends EventDispatcher {
             progressBarFill.style.width = stylePercent;
         };
 
+        li.getVoteCountFromUI = () => {
+            return parseInt(progressBarSpan.innerHTML);
+        };
+
+        li.getCountPercentageFromUI = () => {
+            let percentString = progressBarFill.style.width;
+            l.debug('Percent String: ', percentString);
+            return parseInt(percentString.substring(0, percentString.length - 1));
+        };
         //Final Assembly
         voteButtonDiv.appendChild(voteButton);
         progressBarFill.appendChild(progressBarSpan);
