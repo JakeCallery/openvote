@@ -1,4 +1,5 @@
 const url = require('url');
+const shortId = require('shortid');
 
 class ClientsManager {
     constructor($server){
@@ -14,16 +15,24 @@ class ClientsManager {
             const location = url.parse($req.url, true);
 
             console.log((new Date()) + ' Connection accepted: ' + $req.connection.remoteAddress);
+            $connection.connectionId = shortId.generate();
             this.clientList.push($connection);
 
             let joinMsg = {
-                msgType:'connection',
-                status:'connected',
-                data:{
-                    id:'testid'
-                }
+                msgType:'clientConnected',
+                connectionId:$connection.connectionId
             };
 
+            let confirmMessage = {
+                msgType:'confirmed',
+                connectionId:$connection.connectionId
+            };
+
+
+            //Tell newly connected client what its id is
+            this.sendConnectionConfirmation($connection, confirmMessage);
+
+            //Notify other clients a new client joined
             this.sendMessage($connection, joinMsg);
 
             $connection.on('message', ($msg) => {
@@ -44,12 +53,25 @@ class ClientsManager {
                     if(this.clientList[i] === $connection){
                         console.log('Removing Connection: ', i);
                         this.clientList.splice(i, 1);
+                        break;
                     }
                 }
+
+                //Notify other clients
+                let dropMsg = {
+                    msgType:'clientDropped',
+                    connectionId: $connection.connectionId
+                };
+
+                this.sendMessage($connection, dropMsg);
             });
 
         });
 
+    }
+
+    sendConnectionConfirmation($sourceConnection, $msgData){
+        $sourceConnection.send(JSON.stringify($msgData));
     }
 
     sendMessage($sourceConnection, $dataObj){

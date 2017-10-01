@@ -9,11 +9,12 @@ import BlobUtils from 'jac/utils/BlobUtils';
 class WSManager extends EventDispatcher {
     constructor($doc) {
         super();
+        let self = this;
 
         this.geb = new GlobalEventBus();
         this.doc = $doc;
         this.connect = undefined;
-        let self = this;
+        this.connectionId = null;
 
         //Delegates
         this.sendStringRequestDelegate = EventUtils.bind(self, self.handleSendStringRequest);
@@ -33,47 +34,48 @@ class WSManager extends EventDispatcher {
         l.debug('Websocket URL: ' + websocketURL);
         self.connection = new WebSocket(websocketURL);
 
-        self.connection.onopen = () => {
-            //this.connection.send('Ping');
-            l.debug('Websocket Connected');
-        };
+        self.connection.addEventListener('open', ($evt) => {
+            l.debug('Websocket Connected, waiting on id from server: ', $evt);
+        });
 
-        self.connection.onerror = ($err) => {
-            l.error('WebSocket error: ', $err);
-        };
+        self.connection.addEventListener('close', ($evt) => {
+            l.debug('Websocket connection closed: ', $evt);
+        });
 
-        self.connection.onmessage = ($evt) => {
+        self.connection.addEventListener('error', ($evt) => {
+            l.debug('Websocket ERROR: ', $evt);
+        });
+
+        self.connection.addEventListener('message', ($evt) => {
             l.debug('Caught Message from Server: ', $evt.data);
-            let obj = JSON.parse($evt.data);
-            l.debug('Message: ', obj);
-        };
 
+            let msgObj = JSON.parse($evt.data);
+            l.debug('Message: ', msgObj);
+
+            switch(msgObj.msgType) {
+                case 'confirmed':
+                    l.debug('Setting Connection ID to: ' + msgObj.connectionId);
+                    this.connectionId = msgObj.connectionId;
+                    break;
+
+                case 'clientConnected':
+                    l.debug('Additional Client Connection: ', msgObj.connectionId);
+                    break;
+
+                case 'clientDropped':
+                    l.debug('Client Dropped: ', msgObj.connectionId);
+                    break;
+
+                case 'voteUpdate':
+                    l.debug('Remote Client Vote Update');
+                    break;
+
+                case 'topicUpdate':
+                    l.debug('Remote Client Vote Update');
+                    break;
+            }
+        });
     }
-
-/*
-    handleSendImageRequest($evt) {
-        let self = this;
-
-        l.debug('Sending Image');
-        let imgDataObj = {
-            'type': 'img',
-            'data': $evt.data
-        };
-
-        self.connection.send(JSON.stringify(imgDataObj));
-    }
-
-    handleSendStringRequest($evt) {
-        let self = this;
-
-        l.debug('Sending String', $evt.data);
-        let textDataObj = {
-            'type': 'text',
-            'data': $evt.data
-        };
-        self.connection.send(JSON.stringify(textDataObj));
-    }
-*/
 }
 
 export default WSManager;
