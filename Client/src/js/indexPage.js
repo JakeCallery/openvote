@@ -103,6 +103,7 @@ readyManager.ready()
             l.debug('Response: ', $response);
             if($response.status === Status.SUCCESS){
                 l.debug('Good vote cast', $response);
+                geb.dispatchEvent(new JacEvent('incVoteCount', $response.data));
             } else {
                 l.debug('Cast Vote Failed', $response);
             }

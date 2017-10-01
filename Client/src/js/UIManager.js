@@ -33,10 +33,26 @@ class UIManager extends EventDispatcher {
         //Delegates
         this.submitTopicButtonClickDelegate = EventUtils.bind(self, self.handleSubmitTopicClick);
         this.newTopicCreatedDelegate = EventUtils.bind(self, self.handleNewTopicCreated);
+        this.incVoteCountDelegate = EventUtils.bind(self, self.handleIncVoteCount);
 
         //Events
         this.submitTopicButton.addEventListener('click', this.submitTopicButtonClickDelegate);
         this.geb.addEventListener('newTopicCreated', this.newTopicCreatedDelegate);
+        this.geb.addEventListener('incVoteCount', this.incVoteCountDelegate);
+    }
+
+    handleIncVoteCount($evt){
+        let topidId = $evt.data.topicId;
+        let topicRows = this.graphUl.childNodes;
+        let numTopics = topicRows.length;
+
+        for(let i = 0; i < numTopics; i++){
+            let topicRow = topicRows[i];
+            if(topicRow.topicId === topidId){
+                topicRow.updateVoteCount(topicRow.voteCount+1);
+            }
+        }
+
     }
 
     handleNewTopicCreated($evt){
@@ -66,6 +82,7 @@ class UIManager extends EventDispatcher {
     }
 
     createTopicRow($topic, $maxCount){
+        let self = this;
 
         //Calc bar percentage
         let countPercent = Math.round(($topic.voteCount / $maxCount) * 100);
@@ -79,6 +96,10 @@ class UIManager extends EventDispatcher {
 
         let li = this.doc.createElement('li');
         DOMUtils.addClass(li, 'graphLi');
+
+        //Save custom props
+        li.topicId = $topic.topicId;
+        li.voteCount = $topic.voteCount;
 
         let topicTitleP = this.doc.createElement('p');
         DOMUtils.addClass(topicTitleP, 'topicTitleP');
@@ -113,6 +134,13 @@ class UIManager extends EventDispatcher {
             });
         };
         voteButton.addEventListener('click', voteButton.handleClick);
+
+        //Custom functions
+        li.updateVoteCount = ($newCount) => {
+            li.voteCount = $newCount;
+            progressBarSpan.innerHTML = $newCount;
+            progressBarFill.style.width = Math.round(($newCount / self.currentMaxCount) * 100).toString() + '%';
+        };
 
         //Final Assembly
         voteButtonDiv.appendChild(voteButton);

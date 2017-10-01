@@ -57,7 +57,8 @@ export default class RequestManager extends EventDispatcher {
            .then(($res) => {
                l.debug('Response: ', $res);
                resolve({
-                   status:$res.status
+                   status:$res.status,
+                   data: $res.data
                });
            })
            .catch(($error) => {
