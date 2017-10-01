@@ -84,7 +84,7 @@ class ClientsManager {
 
         for(let i = 0; i < this.clientList.length; i++){
             let conn = this.clientList[i];
-            if($sourceConnection !== null && conn !== $sourceConnection) {
+            if(conn !== $sourceConnection) {
                 conn.send(JSON.stringify($dataObj));
             }
         }
@@ -96,6 +96,8 @@ class ClientsManager {
                 return this.clientList[i];
             }
         }
+
+        console.log('Could not find connection, returning null');
 
         return null;
     }

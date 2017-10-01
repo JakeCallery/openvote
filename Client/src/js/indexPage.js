@@ -36,9 +36,6 @@ readyManager.ready()
     let uiManager = new UIManager(document);
     uiManager.init();
 
-    let wsManager = new WSManager();
-    wsManager.init();
-
     let requestManager = new RequestManager();
 
     //Events
@@ -119,7 +116,15 @@ readyManager.ready()
         topicsDM.addTopic($evt.data);
     });
 
+    geb.addEventListener('wsOpened', ($evt) => {
+         l.debug('Caught Websocket Connected');
+         l.debug('Starting Ping');
+    });
+
     //Kick off (load initial topics)
+    let wsManager = new WSManager();
+    wsManager.init();
+
     geb.dispatchEvent(new JacEvent('requestnewtopicdata'));
 
 })
