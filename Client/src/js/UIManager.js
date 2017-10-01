@@ -40,8 +40,6 @@ class UIManager extends EventDispatcher {
     }
 
     handleUpdatedTopics($evt){
-        l.debug('handling updated topics');
-
         for(let i = 0; i < $evt.data.length; i++){
             let topic = $evt.data[i];
             let topicUI = this.findTopicUI(topic.topicId);
@@ -49,17 +47,13 @@ class UIManager extends EventDispatcher {
                 //Compare and update stats
                 if(
                     topicUI.getVoteCountFromUI() !== topic.voteCount ||
-                    topicUI.getCountPercentageFromUI() !== topic.countPercent
-                ) {
-                    l.debug('Updating UI');
+                    topicUI.getCountPercentageFromUI() !== topic.countPercent)
+                {
                     this.updateTopicRowUI(topic);
-                } else {
-                    l.debug('Skipping UI Update');
                 }
 
             } else {
                 //create new topic
-                l.debug('Creating new topic UI: ' + topic.topicId);
                 this.addTopicRowUI(topic);
             }
         }
@@ -73,7 +67,7 @@ class UIManager extends EventDispatcher {
             }
         }
 
-        l.debug('Topic Row Not found...');
+        //None found
         return null;
     }
 
@@ -154,7 +148,6 @@ class UIManager extends EventDispatcher {
         li.updateVoteCount = ($newCount, $countPercent) => {
             li.voteCount = $newCount;
             let stylePercent = $countPercent.toString() + '%';
-            l.debug('Style Percent: ', $countPercent, stylePercent);
             progressBarSpan.innerHTML = $newCount;
             progressBarFill.style.width = stylePercent;
         };
@@ -165,7 +158,6 @@ class UIManager extends EventDispatcher {
 
         li.getCountPercentageFromUI = () => {
             let percentString = progressBarFill.style.width;
-            l.debug('Percent String: ', percentString);
             return parseInt(percentString.substring(0, percentString.length - 1));
         };
         //Final Assembly
