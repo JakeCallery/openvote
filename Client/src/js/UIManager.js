@@ -47,7 +47,8 @@ class UIManager extends EventDispatcher {
     }
 
     createTopicRow($topic, $maxCount){
-        let countPercent = Math.round($topic.voteCount / $maxCount) * 100;
+        let countPercent = Math.round(($topic.voteCount / $maxCount) * 100);
+
         //Artificially bump to 1
         if(countPercent === 0){
             countPercent = 1
@@ -64,22 +65,34 @@ class UIManager extends EventDispatcher {
 
         let progressBarDiv = this.doc.createElement('div');
         DOMUtils.addClass(progressBarDiv, 'progressBarDiv');
+
         let progressBarTrack = this.doc.createElement('div');
         DOMUtils.addClass(progressBarTrack, 'progressBarTrack');
+
         let progressBarFill = this.doc.createElement('div');
         DOMUtils.addClass(progressBarFill, 'progressBarFill');
         progressBarFill.style.width = countPercent.toString() + '%';
+
         let progressBarSpan = this.doc.createElement('span');
         DOMUtils.addClass(progressBarSpan, 'progressBarSpan');
         progressBarSpan.innerHTML = $topic.voteCount;
 
+        let voteButtonDiv = this.doc.createElement('div');
+        DOMUtils.addClass(voteButtonDiv, 'voteButtonDiv');
+
+        let voteButton = this.doc.createElement('button');
+        DOMUtils.addClass(voteButton, 'simpleButton');
+        DOMUtils.addClass(voteButton, 'voteButton');
+        voteButton.innerHTML = 'Vote';
+
+        //Final Assembly
+        voteButtonDiv.appendChild(voteButton);
         progressBarFill.appendChild(progressBarSpan);
         progressBarTrack.appendChild(progressBarFill);
         progressBarDiv.appendChild(progressBarTrack);
-
-        //Final Assembly
         li.appendChild(topicTitleP);
         li.appendChild(progressBarDiv);
+        li.appendChild(voteButtonDiv);
 
         return li;
     }

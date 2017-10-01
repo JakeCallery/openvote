@@ -90,11 +90,6 @@ button {
     flex-flow: nowrap;
 }
 
-.topicTitleDiv {
-    background-color: aqua;
-    flex-grow: 1;
-}
-
 .topicTitleP {
     background-color: blueviolet;
     width: 30%;
@@ -119,6 +114,10 @@ button {
     line-height: 50px;
 }
 
-.progressBarSpan {
+.voteButtonDiv {
+
+}
+
+.voteButton {
 
 }
