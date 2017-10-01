@@ -69,9 +69,10 @@ readyManager.ready()
             l.debug('Response: ', $response);
             if($response.status === Status.SUCCESS){
                 l.debug('Good Topic Submit', $response);
+                let topic = $response.data;
 
-                //update ui
-                geb.dispatchEvent(new JacEvent('newTopicCreated', $response.data));
+                //Add Topic to local cache
+                topicsDM.addTopic(topic);
 
             } else {
                 l.debug('Topic Submit Failed', $response);
@@ -94,7 +95,6 @@ readyManager.ready()
             l.debug('Response: ', $response);
             if($response.status === Status.SUCCESS){
                 l.debug('Good vote cast', $response);
-                //geb.dispatchEvent(new JacEvent('incVoteCount', $response.data));
                 topicsDM.incVoteCount(topicId);
             } else {
                 l.debug('Cast Vote Failed', $response);

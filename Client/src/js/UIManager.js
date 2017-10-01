@@ -18,8 +18,6 @@ class UIManager extends EventDispatcher {
         this.doc = $doc;
         this.requestManager = new RequestManager();
         this.topicsDM = new TopicsDataModel();
-
-        this.currentMaxCount = 0;
     }
 
     init(){
@@ -34,12 +32,10 @@ class UIManager extends EventDispatcher {
 
         //Delegates
         this.submitTopicButtonClickDelegate = EventUtils.bind(self, self.handleSubmitTopicClick);
-        this.newTopicCreatedDelegate = EventUtils.bind(self, self.handleNewTopicCreated);
         this.updatedTopicsDelegate = EventUtils.bind(self, self.handleUpdatedTopics);
 
         //Events
         this.submitTopicButton.addEventListener('click', this.submitTopicButtonClickDelegate);
-        this.geb.addEventListener('newTopicCreated', this.newTopicCreatedDelegate);
         this.topicsDM.addEventListener('updatedTopics', this.updatedTopicsDelegate);
     }
 
@@ -93,12 +89,6 @@ class UIManager extends EventDispatcher {
     addTopicRowUI($topic){
         let topicUI = this.createTopicRow($topic);
         this.graphUl.appendChild(topicUI);
-    }
-
-    handleNewTopicCreated($evt){
-        let topic = $evt.data;
-        let topicRow = this.createTopicRow(topic, this.currentMaxCount);
-        this.graphUl.appendChild(topicRow);
     }
 
     handleSubmitTopicClick($evt) {

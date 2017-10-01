@@ -22,7 +22,7 @@ export default class TopicsDataModel extends EventDispatcher {
     }
     set currentMaxVoteCount($newCount){
         this._currentMaxVoteCount = $newCount;
-        this.recalcAllPercents();
+        this.reCalcAllPercents();
         this.notifyOfUpdate();
     }
 
@@ -53,8 +53,15 @@ export default class TopicsDataModel extends EventDispatcher {
         return null;
     }
 
-    updateTopics($topics){
-        this.topics = $topics;
+    addTopic($topic) {
+        this.topics.push($topic);
+        this.updateTopics()
+    }
+
+    updateTopics($optTopics) {
+        if(typeof($optTopics) !== 'undefined') {
+            this.topics = $optTopics;
+        }
 
         //Sort data
         this.topics.sort(($a, $b) => {
@@ -89,7 +96,7 @@ export default class TopicsDataModel extends EventDispatcher {
 
     }
 
-    recalcAllPercents(){
+    reCalcAllPercents(){
         for(let i = 0; i < this.topics.length; i++){
             let topic = this.topics[i];
             topic.countPercent = Math.round((topic.voteCount / this.currentMaxVoteCount) * 100);
