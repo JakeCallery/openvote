@@ -25,13 +25,22 @@ class UIManager extends EventDispatcher {
         //DOM Elements
         this.graphContainerDiv = this.doc.getElementById('graphContainerDiv');
         this.graphUl = this.doc.getElementById('graphUl');
+        this.submitTopicField = this.doc.getElementById('submitTopicField');
+        this.submitTopicButton = this.doc.getElementById('submitTopicButton');
 
         //Delegates
-        this.createVoteClickDelegate = EventUtils.bind(self, self.handleCreateVoteClick);
-        this.requestCreateVoteDelegate = EventUtils.bind(self, self.handleRequestCreateVote);
+        this.submitTopicButtonClickDelegate = EventUtils.bind(self, self.handleSubmitTopicClick);
 
         //Events
-        this.uigeb.addEventListener('requestCreateVote', self.requestCreateVoteDelegate);
+        this.submitTopicButton.addEventListener('click', this.submitTopicButtonClickDelegate);
+    }
+
+    handleSubmitTopicClick($evt) {
+        l.debug('Caught Submit Button Click');
+        $evt.target.disabled = true;
+        this.uigeb.dispatchUIEvent('requestSubmitTopic', this.submitTopicField.value, () => {
+             $evt.target.disabled = false;
+        });
     }
 
     createGraph($topicList){

@@ -72,6 +72,26 @@ readyManager.ready()
         uiManager.createGraph(topics);
     });
 
+    uigeb.addEventListener('requestSubmitTopic', ($evt) => {
+        l.debug('Caught Request submit topic: ', $evt.data);
+        requestManager.createTopic({topicName: $evt.data})
+        .then(($response) => {
+            l.debug('Response: ', $response);
+            if($response.status === Status.SUCCESS){
+                l.debug('Good Topic Submit', $response);
+            } else {
+                l.debug('Topic Submit Failed', $response);
+            }
+
+            //Complete event cycle
+            uigeb.completeUIEvent($evt.id, $response);
+        })
+        .catch(($error) => {
+            l.debug('Cast Vote Error: ', $error);
+            uigeb.completeUIEvent($evt.id, $error);
+        });
+    });
+
     uigeb.addEventListener('requestCastVote', ($evt) => {
         l.debug('Caught request to cast vote', $evt.data);
         requestManager.castVote({topicId: $evt.data})
