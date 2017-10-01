@@ -25,7 +25,6 @@ router.post('/', (req, res) => {
                 topicName: topic.properties.topicName
             };
 
-            //res.status(200).json(resObj);
             //Create initial vote for new topic
             return VoteManager.castVote(topic.properties.topicId)
         })
@@ -40,7 +39,8 @@ router.post('/', (req, res) => {
             resObj.data = {
                 voteId: vote.properties.voteId,
                 topicId: topic.properties.topicId,
-                topicName: topic.properties.topicName
+                topicName: topic.properties.topicName,
+                voteCount: 1
             };
 
             res.status(200).json(resObj);

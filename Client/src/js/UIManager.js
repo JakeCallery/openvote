@@ -16,6 +16,8 @@ class UIManager extends EventDispatcher {
         this.uigeb = new UIGEB();
         this.doc = $doc;
         this.requestManager = new RequestManager();
+
+        this.currentMaxCount = 0;
     }
 
     init(){
@@ -30,9 +32,17 @@ class UIManager extends EventDispatcher {
 
         //Delegates
         this.submitTopicButtonClickDelegate = EventUtils.bind(self, self.handleSubmitTopicClick);
+        this.newTopicCreatedDelegate = EventUtils.bind(self, self.handleNewTopicCreated);
 
         //Events
         this.submitTopicButton.addEventListener('click', this.submitTopicButtonClickDelegate);
+        this.geb.addEventListener('newTopicCreated', this.newTopicCreatedDelegate);
+    }
+
+    handleNewTopicCreated($evt){
+        let topic = $evt.data;
+        let topicRow = this.createTopicRow(topic, this.currentMaxCount);
+        this.graphUl.appendChild(topicRow);
     }
 
     handleSubmitTopicClick($evt) {
@@ -47,10 +57,10 @@ class UIManager extends EventDispatcher {
         l.debug('Create Graph UI Topic Data: ', $topicList);
 
         this.clearGraphContainer();
-        let maxCount = $topicList[0].voteCount;
+        this.currentMaxCount = $topicList[0].voteCount;
 
         for(let i = 0; i < $topicList.length; i++){
-            let li = this.createTopicRow($topicList[i], maxCount);
+            let li = this.createTopicRow($topicList[i], this.currentMaxCount);
             this.graphUl.appendChild(li);
         }
     }
@@ -125,36 +135,6 @@ class UIManager extends EventDispatcher {
             this.graphUl.removeChild(node);
         }
     }
-
-/*
-    handleCreateVoteClick($evt){
-        l.debug('Create Vote Click');
-        $evt.target.disabled = true;
-        this.uigeb.dispatchUIEvent('requestCreateVote',
-            'test',
-            () => {
-                $evt.target.disabled = false;
-            })
-    }
-
-    handleRequestCreateVote($evt){
-        l.debug('Request Create Vote');
-
-        //do fetch
-        this.requestManager.castVote({})
-        .then(($response) => {
-            l.debug('Response: ', $response);
-            if($response.status === Status.SUCCESS) {
-                this.uigeb.completeUIEvent($evt.id, $response);
-            }
-        })
-        .catch(($error) => {
-            this.uigeb.completeUIEvent($evt.id, $error);
-        });
-
-    }
-*/
-
 }
 
 export default UIManager;

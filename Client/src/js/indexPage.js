@@ -79,6 +79,10 @@ readyManager.ready()
             l.debug('Response: ', $response);
             if($response.status === Status.SUCCESS){
                 l.debug('Good Topic Submit', $response);
+
+                //update ui
+                geb.dispatchEvent(new JacEvent('newTopicCreated', $response.data));
+
             } else {
                 l.debug('Topic Submit Failed', $response);
             }
