@@ -9,7 +9,7 @@ export default class TopicsDataModel extends EventDispatcher {
         super();
         if(!instance){
             this.topics = [];
-            this.currentMaxVoteCount = 0;
+            this._currentMaxVoteCount = 0;
 
             instance = this;
         }
@@ -17,14 +17,26 @@ export default class TopicsDataModel extends EventDispatcher {
         return instance
     }
 
+    get currentMaxVoteCount(){
+        return this._currentMaxVoteCount
+    }
+    set currentMaxVoteCount($newCount){
+        this._currentMaxVoteCount = $newCount;
+        this.recalcAllPercents();
+        this.notifyOfUpdate();
+    }
+
     incVoteCount($topicId){
         let topic = this.getTopic($topicId);
         if(topic){
-            l.debug('Topic Vote Count Before: ', topic.voteCount);
             topic.voteCount++;
+
+            if(topic.voteCount > this.currentMaxVoteCount)
+            {
+                this.currentMaxVoteCount = topic.voteCount;
+            }
+
             this.updateTopicCountPercentage(topic);
-            l.debug('Topic Vote Count After: ', topic.voteCount);
-            this.notifyOfUpdate();
         } else {
             l.error('Could not find local topic: ', $topicId);
         }
@@ -61,15 +73,28 @@ export default class TopicsDataModel extends EventDispatcher {
         //Update percentages
         for(let i = 0; i < this.topics.length; i++){
             let topic = this.topics[i];
-            this.updateTopicCountPercentage(topic);
+            this.updateTopicCountPercentage(topic, false);
         }
 
         //Let everyone know
         this.notifyOfUpdate();
     }
 
-    updateTopicCountPercentage($topic){
+    updateTopicCountPercentage($topic, $optSkipNotify){
         $topic.countPercent = Math.round(($topic.voteCount / this.currentMaxVoteCount) * 100);
+
+        if(!$optSkipNotify){
+            this.notifyOfUpdate();
+        }
+
+    }
+
+    recalcAllPercents(){
+        for(let i = 0; i < this.topics.length; i++){
+            let topic = this.topics[i];
+            topic.countPercent = Math.round((topic.voteCount / this.currentMaxVoteCount) * 100);
+        }
+        this.notifyOfUpdate();
     }
 
     notifyOfUpdate(){
