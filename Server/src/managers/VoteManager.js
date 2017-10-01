@@ -15,7 +15,10 @@ class VoteManager {
             'MATCH (topic:Topic {topicId:{topicId}}) ' +
             'CREATE (vote:Vote {voteId:{voteId}}), ' +
             '(topic)-[:HAS_VOTE]->(vote) ' +
-            'RETURN vote, topic',
+            'WITH topic, vote ' +
+            'MATCH (topic)-[:HAS_VOTE]->(v:Vote) ' +
+            'WITH topic, vote, count(v) as voteCount ' +
+            'RETURN vote, topic, voteCount',
             {
                 voteId: voteId,
                 topicId: $topicId
