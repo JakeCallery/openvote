@@ -1,4 +1,14 @@
+Create a data model for current topic list
+  update the UI based on that
+  Run through data model, update existing, add new
+
+Client Notification (sockets) on new topic
+  feed through data model
+
 Client Notification (sockets) on new vote
+  feed through data model
+
+
 Create SSL cert
 Create Constraints on DB (no duplicate topic/vote id's etc..)
 
