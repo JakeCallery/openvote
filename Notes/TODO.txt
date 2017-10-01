@@ -1,7 +1,3 @@
-Create a data model for current topic list
-  update the UI based on that
-  Run through data model, update existing, add new
-
 Client Notification (sockets) on new topic
   feed through data model
 
@@ -20,4 +16,7 @@ Vote on topic
 Add first vote on topic creation
 User Login (verify ansys.com user)
 Create Google App credentials (for google login)
+Create a data model for current topic list
+  update the UI based on that
+  Run through data model, update existing, add new
 

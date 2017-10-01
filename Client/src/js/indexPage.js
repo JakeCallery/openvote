@@ -11,6 +11,7 @@ import UIManager from 'UIManager';
 import RequestManager from "./RequestManager";
 import Status from 'general/Status';
 import UIGEB from 'general/UIGEB';
+import TopicsDataModel from 'TopicsDataModel';
 
 //Import through loaders
 import '../css/normalize.css';
@@ -19,6 +20,8 @@ import '../css/main.css';
 l.addLogTarget(new ConsoleTarget());
 l.verboseFilter = (VerboseLevel.NORMAL | VerboseLevel.TIME | VerboseLevel.LEVEL);
 l.levelFilter = (LogLevel.DEBUG | LogLevel.INFO | LogLevel.WARNING | LogLevel.ERROR);
+
+let topicsDM = new TopicsDataModel();
 
 let readyManager = new ReadyManager();
 readyManager.ready()
@@ -56,20 +59,7 @@ readyManager.ready()
 
     geb.addEventListener('newtopicdata', ($evt) => {
         l.debug('New Topic Data: ', $evt.data);
-
-        let topics = $evt.data.topics;
-
-        //Sort data
-        topics.sort(($a, $b) => {
-            if(parseInt($a.voteCount) < parseInt($b.voteCount)){
-                return 1;
-            } else if(parseInt($a.voteCount) > parseInt($b.voteCount)){
-                return -1;
-            } else {
-                return 0;
-            }
-        });
-        uiManager.createGraph(topics);
+        topicsDM.updateTopics($evt.data.topics);
     });
 
     uigeb.addEventListener('requestSubmitTopic', ($evt) => {
@@ -97,13 +87,15 @@ readyManager.ready()
     });
 
     uigeb.addEventListener('requestCastVote', ($evt) => {
+        let topicId = $evt.data;
         l.debug('Caught request to cast vote', $evt.data);
-        requestManager.castVote({topicId: $evt.data})
+        requestManager.castVote({topicId: topicId})
         .then(($response) => {
             l.debug('Response: ', $response);
             if($response.status === Status.SUCCESS){
                 l.debug('Good vote cast', $response);
-                geb.dispatchEvent(new JacEvent('incVoteCount', $response.data));
+                //geb.dispatchEvent(new JacEvent('incVoteCount', $response.data));
+                topicsDM.incVoteCount(topicId);
             } else {
                 l.debug('Cast Vote Failed', $response);
             }

@@ -7,6 +7,7 @@ import JacEvent from 'jac/events/JacEvent';
 import UIGEB from 'general/UIGEB';
 import RequestManager from 'RequestManager';
 import Status from 'general/Status';
+import TopicsDataModel from 'TopicsDataModel';
 
 class UIManager extends EventDispatcher {
     constructor($doc){
@@ -16,6 +17,7 @@ class UIManager extends EventDispatcher {
         this.uigeb = new UIGEB();
         this.doc = $doc;
         this.requestManager = new RequestManager();
+        this.topicsDM = new TopicsDataModel();
 
         this.currentMaxCount = 0;
     }
@@ -33,26 +35,56 @@ class UIManager extends EventDispatcher {
         //Delegates
         this.submitTopicButtonClickDelegate = EventUtils.bind(self, self.handleSubmitTopicClick);
         this.newTopicCreatedDelegate = EventUtils.bind(self, self.handleNewTopicCreated);
-        this.incVoteCountDelegate = EventUtils.bind(self, self.handleIncVoteCount);
+        this.updatedTopicsDelegate = EventUtils.bind(self, self.handleUpdatedTopics);
 
         //Events
         this.submitTopicButton.addEventListener('click', this.submitTopicButtonClickDelegate);
         this.geb.addEventListener('newTopicCreated', this.newTopicCreatedDelegate);
-        this.geb.addEventListener('incVoteCount', this.incVoteCountDelegate);
+        this.topicsDM.addEventListener('updatedTopics', this.updatedTopicsDelegate);
     }
 
-    handleIncVoteCount($evt){
-        let topidId = $evt.data.topicId;
-        let topicRows = this.graphUl.childNodes;
-        let numTopics = topicRows.length;
+    handleUpdatedTopics($evt){
+        l.debug('handling updated topics');
 
-        for(let i = 0; i < numTopics; i++){
-            let topicRow = topicRows[i];
-            if(topicRow.topicId === topidId){
-                topicRow.updateVoteCount(topicRow.voteCount+1);
+        for(let i = 0; i < $evt.data.length; i++){
+            let topic = $evt.data[i];
+            let topicUI = this.findTopicUI(topic.topicId);
+            if(topicUI !== null){
+                //Compare and update stats
+                //TODO: Do actual compare, so as not to update ALL UI items for no reason
+                this.updateTopicRowUI(topic);
+            } else {
+                //create new topic
+                l.debug('Creating new topic UI: ' + topic.topicId);
+                this.addTopicRowUI(topic);
+            }
+        }
+    }
+
+    findTopicUI($topicId){
+        for(let i = 0; i < this.graphUl.childNodes.length; i++){
+            let node = this.graphUl.childNodes[i];
+            if(node.topicId === $topicId){
+                return node;
             }
         }
 
+        l.debug('Topic Row Not found...');
+        return null;
+    }
+
+    updateTopicRowUI($topic){
+        let topicUI = this.findTopicUI($topic.topicId);
+        if(topicUI){
+            topicUI.updateVoteCount($topic.voteCount, $topic.countPercent);
+        } else {
+            l.error('Bad No UI Matching Topic ID: ', $topic.topicId);
+        }
+    }
+
+    addTopicRowUI($topic){
+        let topicUI = this.createTopicRow($topic);
+        this.graphUl.appendChild(topicUI);
     }
 
     handleNewTopicCreated($evt){
@@ -69,30 +101,15 @@ class UIManager extends EventDispatcher {
         });
     }
 
-    createGraph($topicList){
-        l.debug('Create Graph UI Topic Data: ', $topicList);
 
-        this.clearGraphContainer();
-        this.currentMaxCount = $topicList[0].voteCount;
-
-        for(let i = 0; i < $topicList.length; i++){
-            let li = this.createTopicRow($topicList[i], this.currentMaxCount);
-            this.graphUl.appendChild(li);
-        }
-    }
-
-    createTopicRow($topic, $maxCount){
-        let self = this;
-
+    createTopicRow($topic){
         //Calc bar percentage
-        let countPercent = Math.round(($topic.voteCount / $maxCount) * 100);
+        let countPercent = $topic.countPercent;
 
         //Artificially bump to 1
         if(countPercent === 0){
             countPercent = 1
         }
-
-        l.debug('Count Percent: ', countPercent, $topic.voteCount, $maxCount);
 
         let li = this.doc.createElement('li');
         DOMUtils.addClass(li, 'graphLi');
@@ -136,10 +153,12 @@ class UIManager extends EventDispatcher {
         voteButton.addEventListener('click', voteButton.handleClick);
 
         //Custom functions
-        li.updateVoteCount = ($newCount) => {
+        li.updateVoteCount = ($newCount, $countPercent) => {
             li.voteCount = $newCount;
+            let stylePercent = $countPercent.toString() + '%';
+            l.debug('Style Percent: ', $countPercent, stylePercent);
             progressBarSpan.innerHTML = $newCount;
-            progressBarFill.style.width = Math.round(($newCount / self.currentMaxCount) * 100).toString() + '%';
+            progressBarFill.style.width = stylePercent;
         };
 
         //Final Assembly
