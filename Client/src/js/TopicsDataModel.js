@@ -26,10 +26,10 @@ export default class TopicsDataModel extends EventDispatcher {
         this.notifyOfUpdate();
     }
 
-    incVoteCount($topicId){
+    setVoteCount($topicId, $voteCount){
         let topic = this.getTopic($topicId);
         if(topic){
-            topic.voteCount++;
+            topic.voteCount = $voteCount;
 
             if(topic.voteCount > this.currentMaxVoteCount)
             {
@@ -40,7 +40,6 @@ export default class TopicsDataModel extends EventDispatcher {
         } else {
             l.error('Could not find local topic: ', $topicId);
         }
-
     }
 
     getTopic($topicId){

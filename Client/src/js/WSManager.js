@@ -76,7 +76,7 @@ class WSManager extends EventDispatcher {
                     break;
 
                 case 'topicUpdate':
-                    l.debug('Remote Client Vote Update');
+                    l.debug('Remote Client Topic Update');
                     this.geb.dispatchEvent(new JacEvent('newRemoteTopicData', msgObj.data));
                     break;
             }

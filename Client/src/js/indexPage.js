@@ -95,7 +95,7 @@ readyManager.ready()
             l.debug('Response: ', $response);
             if($response.status === Status.SUCCESS){
                 l.debug('Good vote cast', $response);
-                topicsDM.incVoteCount(topicId);
+                topicsDM.setVoteCount($response.data.topicId, $response.data.voteCount);
             } else {
                 l.debug('Cast Vote Failed', $response);
             }
@@ -107,6 +107,12 @@ readyManager.ready()
             l.debug('Cast Vote Error: ', $error);
             uigeb.completeUIEvent($evt.id, $response);
         });
+    });
+
+    geb.addEventListener('newRemoteVoteData', ($evt) => {
+        let topicId = $evt.data.topicId;
+        let voteCount = $evt.data.voteCount;
+        topicsDM.setVoteCount(topicId, voteCount);
     });
 
     //Kick off (load initial topics)
