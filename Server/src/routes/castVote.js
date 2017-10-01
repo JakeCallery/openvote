@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const shortId = require('shortid');
 const promiseRetry = require('promise-retry');
 const VoteManager = require('../managers/VoteManager');
 const ClientsManager = require('../managers/ClientsManager');

@@ -115,6 +115,10 @@ readyManager.ready()
         topicsDM.setVoteCount(topicId, voteCount);
     });
 
+    geb.addEventListener('newRemoteTopicData', ($evt) => {
+        topicsDM.addTopic($evt.data);
+    });
+
     //Kick off (load initial topics)
     geb.dispatchEvent(new JacEvent('requestnewtopicdata'));
 

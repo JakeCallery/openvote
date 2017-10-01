@@ -101,13 +101,22 @@ class ClientsManager {
     }
 
     notifyClientsOfVote($sourceClientId, $voteData){
-        let sourceConnnection = this.getConnectionById($sourceClientId);
+        let sourceConnection = this.getConnectionById($sourceClientId);
         let msgData = {
             msgType: 'voteUpdate',
             data: $voteData
-        }
+        };
 
-        this.sendMessage(sourceConnnection, msgData);
+        this.sendMessage(sourceConnection, msgData);
+    }
+
+    notifyClientsOfTopic($sourceClientId, $topicData){
+        let sourceConnection = this.getConnectionById($sourceClientId);
+        let msgData = {
+            msgType: 'topicUpdate',
+            data: $topicData
+        };
+        this.sendMessage(sourceConnection, msgData);
     }
 }
 

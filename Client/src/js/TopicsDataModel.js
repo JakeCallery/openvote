@@ -54,7 +54,7 @@ export default class TopicsDataModel extends EventDispatcher {
 
     addTopic($topic) {
         this.topics.push($topic);
-        this.updateTopics()
+        this.updateTopics();
     }
 
     updateTopics($optTopics) {
