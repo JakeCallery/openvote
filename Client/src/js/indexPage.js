@@ -53,7 +53,21 @@ readyManager.ready()
 
     geb.addEventListener('newtopicdata', ($evt) => {
         l.debug('New Topic Data: ', $evt.data);
-        uiManager.createGraph($evt.data.topics);
+
+        let topics = $evt.data.topics;
+
+        //Sort data
+        topics.sort(($a, $b) => {
+            if(parseInt($a.voteCount) < parseInt($b.voteCount)){
+                return 1;
+            } else if(parseInt($a.voteCount) > parseInt($b.voteCount)){
+                return -1;
+            } else {
+                return 0;
+            }
+        });
+
+        uiManager.createGraph(topics);
     });
 
     //Kick off

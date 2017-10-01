@@ -38,14 +38,23 @@ class UIManager extends EventDispatcher {
         l.debug('Create Graph UI Topic Data: ', $topicList);
 
         this.clearGraphContainer();
+        let maxCount = $topicList[0].voteCount;
 
         for(let i = 0; i < $topicList.length; i++){
-            let li = this.createTopicRow($topicList[i]);
+            let li = this.createTopicRow($topicList[i], maxCount);
             this.graphUl.appendChild(li);
         }
     }
 
-    createTopicRow($topic){
+    createTopicRow($topic, $maxCount){
+        let countPercent = Math.round($topic.voteCount / $maxCount) * 100;
+        //Artificially bump to 1
+        if(countPercent === 0){
+            countPercent = 1
+        }
+
+        l.debug('Count Percent: ', countPercent, $topic.voteCount, $maxCount);
+
         let li = this.doc.createElement('li');
         DOMUtils.addClass(li, 'graphLi');
 
@@ -59,9 +68,10 @@ class UIManager extends EventDispatcher {
         DOMUtils.addClass(progressBarTrack, 'progressBarTrack');
         let progressBarFill = this.doc.createElement('div');
         DOMUtils.addClass(progressBarFill, 'progressBarFill');
+        progressBarFill.style.width = countPercent.toString() + '%';
         let progressBarSpan = this.doc.createElement('span');
         DOMUtils.addClass(progressBarSpan, 'progressBarSpan');
-        progressBarSpan.innerHTML = '200';
+        progressBarSpan.innerHTML = $topic.voteCount;
 
         progressBarFill.appendChild(progressBarSpan);
         progressBarTrack.appendChild(progressBarFill);

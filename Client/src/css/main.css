@@ -84,7 +84,7 @@ button {
 }
 
 .graphLi {
-    height: 50px;
+    height: auto;
     display: flex;
     flex-direction: row;
     flex-flow: nowrap;
@@ -112,8 +112,8 @@ button {
 
 .progressBarFill {
     background: #666;
-    height:50px;
-    width: 50%;
+    height: 50px;
+    width: 70%;
     text-align: center;
     font-size: 12px;
     line-height: 50px;
