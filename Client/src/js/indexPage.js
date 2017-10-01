@@ -10,6 +10,7 @@ import ReadyManager from 'ready/ReadyManager';
 import UIManager from 'UIManager';
 import RequestManager from "./RequestManager";
 import Status from 'general/Status';
+import UIGEB from 'general/UIGEB';
 
 //Import through loaders
 import '../css/normalize.css';
@@ -23,8 +24,10 @@ let readyManager = new ReadyManager();
 readyManager.ready()
     .then(($response) => {
     l.debug('READY!');
-    //Basic Managers / Buses
+
+    //Set up event buses
     let geb = new GlobalEventBus();
+    let uigeb = new UIGEB();
 
     //Start App Here
     let uiManager = new UIManager(document);
@@ -66,8 +69,27 @@ readyManager.ready()
                 return 0;
             }
         });
-
         uiManager.createGraph(topics);
+    });
+
+    uigeb.addEventListener('requestCastVote', ($evt) => {
+        l.debug('Caught request to cast vote', $evt.data);
+        requestManager.castVote({topicId: $evt.data})
+        .then(($response) => {
+            l.debug('Response: ', $response);
+            if($response.status === Status.SUCCESS){
+                l.debug('Good vote cast', $response);
+            } else {
+                l.debug('Cast Vote Failed', $response);
+            }
+
+            //Complete event cycle
+            uigeb.completeUIEvent($evt.id, $response);
+        })
+        .catch(($error) => {
+            l.debug('Cast Vote Error: ', $error);
+            uigeb.completeUIEvent($evt.id, $response);
+        });
     });
 
     //Kick off

@@ -115,7 +115,9 @@ button {
 }
 
 .voteButtonDiv {
-
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .voteButton {

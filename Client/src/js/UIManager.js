@@ -47,6 +47,8 @@ class UIManager extends EventDispatcher {
     }
 
     createTopicRow($topic, $maxCount){
+
+        //Calc bar percentage
         let countPercent = Math.round(($topic.voteCount / $maxCount) * 100);
 
         //Artificially bump to 1
@@ -84,6 +86,14 @@ class UIManager extends EventDispatcher {
         DOMUtils.addClass(voteButton, 'simpleButton');
         DOMUtils.addClass(voteButton, 'voteButton');
         voteButton.innerHTML = 'Vote';
+        voteButton.handleClick = ($evt) => {
+            l.debug('vote Click: ', $topic.topicId);
+            $evt.target.disabled = true;
+            this.uigeb.dispatchUIEvent('requestCastVote', $topic.topicId, () => {
+                $evt.target.disabled = false;
+            });
+        };
+        voteButton.addEventListener('click', voteButton.handleClick);
 
         //Final Assembly
         voteButtonDiv.appendChild(voteButton);
