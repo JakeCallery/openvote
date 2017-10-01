@@ -38,10 +38,7 @@ class ClientsManager {
                 this.sendMessage($connection, joinMsg);
 
                 $connection.on('message', ($msg) => {
-                    console.log('Raw Message: ', $msg);
-
-
-                    //console.log('Message: ', $msg);
+                    //console.log('Raw Message: ', $msg);
                 });
 
                 $connection.on('close', ($code, $reason) => {

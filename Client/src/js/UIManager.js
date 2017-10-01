@@ -29,14 +29,22 @@ class UIManager extends EventDispatcher {
         this.graphUl = this.doc.getElementById('graphUl');
         this.submitTopicField = this.doc.getElementById('submitTopicField');
         this.submitTopicButton = this.doc.getElementById('submitTopicButton');
+        this.logoutButton = this.doc.getElementById('logoutButton');
 
         //Delegates
         this.submitTopicButtonClickDelegate = EventUtils.bind(self, self.handleSubmitTopicClick);
         this.updatedTopicsDelegate = EventUtils.bind(self, self.handleUpdatedTopics);
+        this.logoutButtonClickDelegate = EventUtils.bind(self, self.handleLogoutButtonClick);
 
         //Events
         this.submitTopicButton.addEventListener('click', this.submitTopicButtonClickDelegate);
         this.topicsDM.addEventListener('updatedTopics', this.updatedTopicsDelegate);
+        this.logoutButton.addEventListener('click', this.logoutButtonClickDelegate);
+    }
+
+    handleLogoutButtonClick($evt){
+        l.debug('Caught Logout Button Click');
+        window.location = '/logout';
     }
 
     handleUpdatedTopics($evt){
