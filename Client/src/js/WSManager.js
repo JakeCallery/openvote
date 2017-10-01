@@ -17,12 +17,9 @@ class WSManager extends EventDispatcher {
         this.connectionId = null;
 
         //Delegates
-        this.sendStringRequestDelegate = EventUtils.bind(self, self.handleSendStringRequest);
-        this.sendImageRequestDelegate = EventUtils.bind(self, self.handleSendImageRequest);
 
         //Events
-        this.geb.addEventListener('requestsendstring', self.sendStringRequestDelegate);
-        this.geb.addEventListener('requestsendimage', self.sendImageRequestDelegate);
+
     }
 
     init() {
@@ -36,14 +33,18 @@ class WSManager extends EventDispatcher {
 
         self.connection.addEventListener('open', ($evt) => {
             l.debug('Websocket Connected, waiting on id from server: ', $evt);
+            this.geb.dispatchEvent(new JacEvent('wsOpened', $evt));
         });
 
         self.connection.addEventListener('close', ($evt) => {
             l.debug('Websocket connection closed: ', $evt);
+            this.geb.dispatchEvent(new JacEvent('wsClosed', $evt));
+            this.geb.dispatchEvent(new JacEvent('wsDisconnected', $evt));
         });
 
         self.connection.addEventListener('error', ($evt) => {
             l.debug('Websocket ERROR: ', $evt);
+            this.geb.dispatchEvent(new JacEvent('wsError', $evt));
         });
 
         self.connection.addEventListener('message', ($evt) => {
@@ -56,22 +57,27 @@ class WSManager extends EventDispatcher {
                 case 'confirmed':
                     l.debug('Setting Connection ID to: ' + msgObj.connectionId);
                     this.connectionId = msgObj.connectionId;
+                    this.geb.dispatchEvent(new JacEvent('wsConnected', this.connectionId));
                     break;
 
                 case 'clientConnected':
                     l.debug('Additional Client Connection: ', msgObj.connectionId);
+                    this.geb.dispatchEvent(new JacEvent('remoteClientConnected', msgObj.connectionId));
                     break;
 
                 case 'clientDropped':
                     l.debug('Client Dropped: ', msgObj.connectionId);
+                    this.geb.dispatchEvent(new JacEvent('remoteClientDropped', msgObj.connectionId));
                     break;
 
                 case 'voteUpdate':
-                    l.debug('Remote Client Vote Update');
+                    l.debug('Remote Client Vote Update: ', msgObj.data);
+                    this.geb.dispatchEvent(new JacEvent('newRemoteVoteData', msgObj.data));
                     break;
 
                 case 'topicUpdate':
                     l.debug('Remote Client Vote Update');
+                    this.geb.dispatchEvent(new JacEvent('newRemoteTopicData', msgObj.data));
                     break;
             }
         });

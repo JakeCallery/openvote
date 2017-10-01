@@ -109,7 +109,7 @@ readyManager.ready()
         });
     });
 
-    //Kick off
+    //Kick off (load initial topics)
     geb.dispatchEvent(new JacEvent('requestnewtopicdata'));
 
 })

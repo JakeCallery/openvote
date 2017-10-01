@@ -3,9 +3,12 @@ const router = express.Router();
 const shortId = require('shortid');
 const promiseRetry = require('promise-retry');
 const VoteManager = require('../managers/VoteManager');
+const ClientsManager = require('../managers/ClientsManager');
 
 router.post('/', (req, res) => {
     console.log('Caught Cast Vote Request');
+
+    let cm = new ClientsManager(null);
 
     promiseRetry((retry, attempt) => {
         console.log('Cast Vote Attempt: ' + attempt);
@@ -28,6 +31,8 @@ router.post('/', (req, res) => {
                 topicName: topic.properties.topicName
             };
 
+            console.log('Source Connection Id: ', req.body.connectionId);
+            cm.notifyClientsOfVote(req.body.connectionId, resObj.data);
             res.status(200).json(resObj);
         })
         .catch(($error) => {

@@ -10,6 +10,18 @@ export default class RequestManager extends EventDispatcher {
         let self = this;
         l.debug('New Request Manager');
         this.geb = new GlobalEventBus();
+
+        //Handle WS Id
+        this.connectionId = null;
+        this.geb.addEventListener('wsConnected', ($evt) => {
+            l.debug('Req Manager Caught WS Connected: ', $evt.data);
+             this.connectionId = $evt.data;
+        });
+
+        this.geb.addEventListener('wsDisconnected', ($evt) => {
+            l.debug('Req Manager Caught WS Disconnect, nulling conn id');
+            this.connectionId = null;
+        });
     }
 
     getTopics() {
@@ -43,6 +55,7 @@ export default class RequestManager extends EventDispatcher {
 
     castVote($voteData) {
         return new Promise((resolve, reject) => {
+            $voteData.connectionId = this.connectionId;
            fetch('/api/castVote', {
                method: 'POST',
                credentials: 'include',
@@ -73,6 +86,7 @@ export default class RequestManager extends EventDispatcher {
 
     createTopic($topicData) {
         return new Promise((resolve, reject) => {
+            $topicData.connectionId = this.connectionId;
             fetch('/api/createTopic', {
                 method: 'POST',
                 credentials: 'include',
