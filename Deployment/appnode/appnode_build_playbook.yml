@@ -7,15 +7,15 @@
 
   tasks:
     - name: Webpack client app
-      script: /cheevos/deployment/appnode/remoteScripts/buildClient.sh
+      script: /openvote/Deployment/appnode/remoteScripts/buildClient.sh
 
     - name: Remove dist under webserver
       file:
-        path: /cheevos/webserver/dist
+        path: /openvote/Server/dist
         state: absent
 
     - name: Setup dist link
       file:
-        src:  /cheevos/webclient/dist
-        dest: /cheevos/webserver/views/dist
+        src:  /openvote/dist
+        dest: /openvote/Server/src/views/dist
         state: link

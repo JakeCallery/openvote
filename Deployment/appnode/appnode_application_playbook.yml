@@ -8,20 +8,20 @@
   tasks:
     - name: Download Application Repo
       git:
-        repo: 'git@bitbucket.org:JakeCallery/cheevos.git'
+        repo: 'git@bitbucket.org:JakeCallery/openvote.git'
         accept_hostkey: yes
-        dest: /cheevos
+        dest: /openvote
         force: true
 
     - name: Copy Webserver Keys Direcotry
       copy:
-       src: /cheevos_keys/
-       dest: /cheevos/webserver/keys
+       src: /openvote/Server/src/keys
+       dest: /openvote/Server/src/keys
 
-    - name: Copy Webserver Certs
-      copy:
-        src: /cheevos_certs/
-        dest: /cheevos/certs
+#    - name: Copy Webserver Certs
+#      copy:
+#        src: /openvote/certs
+#        dest: /openvote/certs
 
     - name: Install Webpack globally
       npm:
@@ -30,13 +30,13 @@
 
     - name: Install WebServer Dependencies
       npm:
-        path: /cheevos/webserver/src
+        path: /openvote/Server/src
       retries: 10
       delay: 3
 
     - name: Install WebClient Dependencies
       npm:
-        path: /cheevos/webclient/src
+        path: /openvote/Client/src
       retries: 10
       delay: 3
 

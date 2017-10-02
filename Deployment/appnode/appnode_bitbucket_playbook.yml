@@ -8,7 +8,7 @@
   tasks:
     - name: Copy Bit Bucket Private Key
       copy:
-        src: /cheevos_deployment/keys/bitbucket_private
+        src: /openvote/Deployment/keys/bitbucket_private
         dest: /root/.ssh/id_rsa
         owner: root
         group: root
@@ -16,7 +16,7 @@
 
     - name: Copy known_hosts
       copy:
-        src: /cheevos_deployment/keys/bitbucket_known_hosts
+        src: /openvote/Deployment/keys/bitbucket_known_hosts
         dest: /root/.ssh/known_hosts
         owner: root
         group: root

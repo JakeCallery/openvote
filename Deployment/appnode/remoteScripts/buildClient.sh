@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-cd /cheevos/webclient/src
+cd /openvote/Client/src
 webpack

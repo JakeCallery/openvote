@@ -13,7 +13,7 @@
 
     - name: Add Neo4j Repo to yum.repos.d
       copy:
-        src: /cheevos/deployment/appnode/filesToCopy/neo4j.repo
+        src: /openvote/Deployment/appnode/filesToCopy/neo4j.repo
         dest: /etc/yum.repos.d/
 
     - name: Install Neo4j (yum)
@@ -23,7 +23,7 @@
 
     - name: Copy Neo4j Configuration
       copy:
-        src: /cheevos/deployment/appnode/filesToCopy/neo4j.conf
+        src: /openvote/Deployment/appnode/filesToCopy/neo4j.conf
         dest: /etc/neo4j
 
     - name: Enable Neo4j on boot (systemctl)
@@ -37,11 +37,11 @@
         state: started
 
     - name: Wait for DB to start
-      script: /cheevos/deployment/appnode/remoteScripts/waitForDBStart.sh
+      script: /openvote/Deployment/appnode/remoteScripts/waitForDBStart.sh
       args:
         creates: /etc/neo4j/db_started
 
     - name: Change DB Password
-      script: /cheevos/deployment/appnode/remoteScripts/updateDBPassword.sh {{ neo4j_pass|quote }}
+      script: /openvote/Deployment/appnode/remoteScripts/updateDBPassword.sh {{ neo4j_pass|quote }}
       args:
         creates: /etc/neo4j/pass_set
