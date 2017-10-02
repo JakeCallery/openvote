@@ -10,6 +10,11 @@
       wait_for:
         port: 22
 
+    - name: Install dos2unix
+      yum:
+        name: dos2unix
+        state: latest
+
     - name: Copy bash profile
       copy:
         src: /openvote/Deployment/appnode/filesToCopy/bash_profile
