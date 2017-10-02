@@ -11,7 +11,7 @@
 
     - name: Remove dist under webserver
       file:
-        path: /openvote/Server/dist
+        path: /openvote/Server/src/views/dist
         state: absent
 
     - name: Setup dist link
