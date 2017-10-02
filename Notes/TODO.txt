@@ -1,9 +1,12 @@
-Client Notification (sockets) on new topic
-  feed through data model
+Deployment Scripts
 
-Client Notification (sockets) on new vote
-  feed through data model
+Invalid character Security (DB and Sockets)
+HTML in Topic Name Security (DB and Sockets)
 
+Full Site Styling
+  Style Index Page
+  Style Login Page
+  Style Unauthorized Page
 
 Create SSL cert
 Create Constraints on DB (no duplicate topic/vote id's etc..)
@@ -19,4 +22,9 @@ Create Google App credentials (for google login)
 Create a data model for current topic list
   update the UI based on that
   Run through data model, update existing, add new
+Client Notification (sockets) on new topic
+  feed through data model
+
+Client Notification (sockets) on new vote
+  feed through data model
 

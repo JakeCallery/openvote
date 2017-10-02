@@ -1,0 +1,14 @@
+create script to start webserver
+start application (nodejs bits / pm2?)
+
+DONE:
+webpack (webclient)
+copy over webserver "certs" (/cheevos/certs)
+npm install webpack globally
+npm install (webserver)
+npm install (webclient)
+Copy webserver "keys" directory
+Add ssh key (see notes.txt)
+start ssh-agent (see notes.txt)
+add key to ssh-agent (see notes.txt)
+git clone git@bitbucket.org:JakeCallery/cheevos.git
