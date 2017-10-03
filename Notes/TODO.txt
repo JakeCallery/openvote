@@ -1,6 +1,3 @@
-Invalid character Security (DB and Sockets)
-HTML in Topic Name Security (DB and Sockets)
-
 Full Site Styling
   Style Index Page
   Style Login Page
@@ -8,6 +5,7 @@ Full Site Styling
 
 Create SSL cert
 Create Constraints on DB (no duplicate topic/vote id's etc..)
+Helmet integration
 
 --- DONE ---
 Create DB
@@ -27,3 +25,6 @@ Client Notification (sockets) on new vote
   feed through data model
 
 Deployment Scripts
+
+Invalid character Security (DB and Sockets)
+HTML in Topic Name Security (DB and Sockets)
