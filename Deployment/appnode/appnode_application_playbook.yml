@@ -16,7 +16,7 @@
     - name: Copy Webserver Keys Direcotry
       copy:
        src: /openvote/Server/src/keys
-       dest: /openvote/Server/src/keys
+       dest: /openvote/Server/src
 
 #    - name: Copy Webserver Certs
 #      copy:

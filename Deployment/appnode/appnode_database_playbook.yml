@@ -18,7 +18,7 @@
 
     - name: Install Neo4j (yum)
       yum:
-        name: neo4j-3.2.2
+        name: neo4j
         state: latest
 
     - name: Copy Neo4j Configuration
@@ -34,7 +34,7 @@
     - name: Start Neo4j service (systemctl)
       systemd:
         name: neo4j
-        state: started
+        state: restarted
 
     - name: Wait for DB to start
       script: /openvote/Deployment/appnode/remoteScripts/waitForDBStart.sh

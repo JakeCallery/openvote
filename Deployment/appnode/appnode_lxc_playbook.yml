@@ -14,7 +14,7 @@
         api_user: "{{ pve_api_user }}"
         api_password: "{{ pve_api_password }}"
         password: "password"
-        hostname: "appnode1"
+        hostname: "openvoteapp"
         disk: 100
         memory: 2048
         ostemplate: 'local:vztmpl/centos-7-default_20161207_amd64.tar.xz'
