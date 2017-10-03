@@ -13,6 +13,7 @@ const ejs = require('ejs');
 const session = require('cookie-session');
 const passport = require('passport');
 const passportConfig = require('./config/passport')(passport);
+const expressSanitized = require('express-sanitize-escape');
 
 //TODO: externalize keys
 app.use(session({
@@ -67,6 +68,7 @@ app.set('trust proxy', 1);
 app.engine('html', ejs.renderFile);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(expressSanitized.middleware());
 
 //Page routes
 app.use('/', indexPage);
