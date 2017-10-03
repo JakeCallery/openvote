@@ -13,6 +13,9 @@ import Status from 'general/Status';
 import UIGEB from 'general/UIGEB';
 import TopicsDataModel from 'TopicsDataModel';
 
+//https://www.npmjs.com/package/sanitize-html
+import sanitizeHtml from 'sanitizeHtml/sanitize-html.min';
+
 //Import through loaders
 import '../css/normalize.css';
 import '../css/main.css';
@@ -56,12 +59,22 @@ readyManager.ready()
 
     geb.addEventListener('newtopicdata', ($evt) => {
         l.debug('New Topic Data: ', $evt.data);
+
+        //sanitize topic names:
+        let topics = $evt.data.topics;
+        for(let i = 0; i < topics.length; i++){
+            let topic = topics[i];
+            topic.topicName = sanitizeHtml(topic.topicName);
+        }
+
         topicsDM.updateTopics($evt.data.topics);
     });
 
     uigeb.addEventListener('requestSubmitTopic', ($evt) => {
         l.debug('Caught Request submit topic: ', $evt.data);
-        requestManager.createTopic({topicName: $evt.data})
+        let topicName = $evt.data;
+        topicName = sanitizeHtml(topicName);
+        requestManager.createTopic({topicName: topicName})
         .then(($response) => {
             l.debug('Response: ', $response);
             if($response.status === Status.SUCCESS){
@@ -69,6 +82,7 @@ readyManager.ready()
                 let topic = $response.data;
 
                 //Add Topic to local cache
+                topic.topicName = sanitizeHtml(topic.topicName);
                 topicsDM.addTopic(topic);
 
             } else {
@@ -113,7 +127,11 @@ readyManager.ready()
     });
 
     geb.addEventListener('newRemoteTopicData', ($evt) => {
-        topicsDM.addTopic($evt.data);
+        let topic = $evt.data;
+        console.log('Topic Name BEFORE Sanitize: ', topic.topicName);
+        topic.topicName = sanitizeHtml(topic.topicName);
+        console.log('Topic Name After Sanitize: ', topic.topicName);
+        topicsDM.addTopic(topic);
     });
 
     geb.addEventListener('wsOpened', ($evt) => {
