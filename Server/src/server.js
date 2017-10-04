@@ -15,6 +15,7 @@ const session = require('cookie-session');
 const passport = require('passport');
 const passportConfig = require('./config/passport')(passport);
 const expressSanitized = require('express-sanitize-escape');
+const helmet = require('helmet');
 
 //TODO: externalize keys
 app.use(session({
@@ -69,6 +70,7 @@ server.listen(8443, () => {
 });
 
 //Server Setup
+app.use(helmet());
 app.use(logger('dev'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
