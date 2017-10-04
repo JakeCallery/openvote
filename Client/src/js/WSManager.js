@@ -29,7 +29,7 @@ class WSManager extends EventDispatcher {
         let self = this;
 
         let host = window.document.location.host.replace(/:.*/, '');
-        let websocketURL = 'ws://' + host + ':' + window.document.location.port;
+        let websocketURL = 'wss://' + host + ':' + window.document.location.port;
         l.debug('Websocket URL: ' + websocketURL);
         self.connection = new WebSocket(websocketURL);
 

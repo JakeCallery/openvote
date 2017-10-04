@@ -18,10 +18,10 @@
        src: /openvote/Server/src/keys
        dest: /openvote/Server/src
 
-#    - name: Copy Webserver Certs
-#      copy:
-#        src: /openvote/certs
-#        dest: /openvote/certs
+    - name: Copy Webserver Certs
+      copy:
+        src: /openvote/Server/Certs
+        dest: /openvote/Server/Certs
 
     - name: Install Webpack globally
       npm:

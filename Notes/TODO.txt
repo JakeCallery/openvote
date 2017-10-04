@@ -3,9 +3,12 @@ Full Site Styling
   Style Login Page
   Style Unauthorized Page
 
-Create SSL cert
+Setup https/ssl
 Create Constraints on DB (no duplicate topic/vote id's etc..)
 Helmet integration
+
+SSL Cert / auto renew
+Nightly Backups (more than just nightly snapshot)
 
 --- DONE ---
 Create DB
@@ -28,3 +31,5 @@ Deployment Scripts
 
 Invalid character Security (DB and Sockets)
 HTML in Topic Name Security (DB and Sockets)
+
+Create SSL cert

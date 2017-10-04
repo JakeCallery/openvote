@@ -1,5 +1,6 @@
 const ClientsManager = require('./managers/ClientsManager');
-
+const fs = require('fs');
+const https = require('https');
 const http = require('http');
 const path = require('path');
 const url = require('url');
@@ -46,8 +47,15 @@ const createTopic = require('./routes/createTopic');
 const getTopics = require('./routes/getTopics');
 const checkLoggedIn = require('./routes/checkLoggedIn');
 
+//Load web certs
+let serverOptions = {
+    key: fs.readFileSync('../certs/privkey.pem'),
+    cert: fs.readFileSync('../certs/fullchain.pem'),
+    ca: fs.readFileSync('../certs/chain.pem'),
+};
+
 //Setup server
-const server = http.createServer(app);
+const server = https.createServer(serverOptions, app);
 
 //Setup socket server
 const wss = new WebSocket.Server({
@@ -56,7 +64,7 @@ const wss = new WebSocket.Server({
 
 let clientsManager = new ClientsManager(wss);
 
-server.listen(8888, () => {
+server.listen(8443, () => {
     console.log('Listening on %d', server.address().port);
 });
 
