@@ -54,9 +54,9 @@ const checkLoggedIn = require('./routes/checkLoggedIn');
 
 //Load web certs
 let serverOptions = {
-    key: fs.readFileSync('../certs/privkey.pem'),
-    cert: fs.readFileSync('../certs/fullchain.pem'),
-    ca: fs.readFileSync('../certs/chain.pem'),
+    key: fs.readFileSync('../Certs/privkey.pem'),
+    cert: fs.readFileSync('../Certs/fullchain.pem'),
+    ca: fs.readFileSync('../Certs/chain.pem'),
 };
 
 //Setup server
