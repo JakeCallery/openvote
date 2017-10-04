@@ -18,10 +18,14 @@ const expressSanitized = require('express-sanitize-escape');
 const helmet = require('helmet');
 
 //TODO: externalize keys
+const cookieKeys = require('./keys/cookieKeys');
 app.use(session({
-    name: 'session',
-    keys: ['6bXufH9qXWmZhQznx33QY26QV','5BBqd75pQ3mMwKohtSjf8Thqp'],
+    name: 'sessionId',
+    keys: cookieKeys.keys,
     httpOnly: true,
+    secure: true,
+    sameSite: 'strict',
+    domain: 'jakecallery.com',
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }));
 
