@@ -53,11 +53,23 @@ const getTopics = require('./routes/getTopics');
 const checkLoggedIn = require('./routes/checkLoggedIn');
 
 //Load web certs
-let serverOptions = {
-    key: fs.readFileSync('../Certs/privkey.pem'),
-    cert: fs.readFileSync('../Certs/fullchain.pem'),
-    ca: fs.readFileSync('../Certs/chain.pem'),
-};
+let serverOptions = null;
+
+if(process.env.development === 'true'){
+    console.log('Using Development Cert');
+    serverOptions = {
+        key: fs.readFileSync('../Certs/dev/privkey.pem'),
+        cert: fs.readFileSync('../Certs/dev/fullchain.pem'),
+        ca: fs.readFileSync('../Certs/dev/chain.pem'),
+    };
+} else {
+    serverOptions = {
+        key: fs.readFileSync('../Certs/privkey.pem'),
+        cert: fs.readFileSync('../Certs/fullchain.pem'),
+        ca: fs.readFileSync('../Certs/chain.pem'),
+    };
+}
+
 
 //Setup server
 const server = https.createServer(serverOptions, app);

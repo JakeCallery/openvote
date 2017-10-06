@@ -6,6 +6,15 @@
 const promiseRetry = require('promise-retry');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const authConfig = require('../keys/authConfig.js');
+let googleConfig = null;
+
+if(process.env.development === 'true'){
+    console.log('Using Development Google Auth Config');
+    googleConfig = authConfig.googleAuthDev;
+} else {
+    googleConfig = authConfig.googleAuth;
+}
+
 const User = require('../models/User');
 
 module.exports = function(passport){
@@ -26,7 +35,7 @@ module.exports = function(passport){
     });
 
     passport.use(new GoogleStrategy(
-        authConfig.googleAuth,
+        googleConfig,
         (accessToken, refreshToken, profile, done) => {
             process.nextTick(() => {
                 let idObj = {

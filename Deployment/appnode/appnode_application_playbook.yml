@@ -21,7 +21,7 @@
     - name: Copy Webserver Certs
       copy:
         src: /openvote/Server/Certs
-        dest: /openvote/Server/Certs
+        dest: /openvote/Server
 
     - name: Install Webpack globally
       npm:

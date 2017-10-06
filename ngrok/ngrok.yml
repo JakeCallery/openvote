@@ -9,8 +9,8 @@ tunnels:
     addr: 8443
     hostname: techvote.jakecallery.com
 
-  webclient_http:
-    proto: http
-    addr: 8888
-    hostname: techvote.jakecallery.com
+  webclient_dev:
+    proto: tls
+    addr: 8443
+    hostname: techvotedev.jakecallery.com
 
