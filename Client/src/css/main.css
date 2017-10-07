@@ -222,6 +222,7 @@ h3 {
 ***************************/
 .graphContainerDiv {
     width: 100%;
+    margin-bottom: 50px;
 }
 
 
@@ -231,15 +232,17 @@ h3 {
     flex-direction: column;
     justify-content: center;
     width: 70%;
+    margin-right: 25px;
 }
 
 .progressBarSpan {
     font-family: 'Cabin', sans-serif;
     font-weight: bolder;
-    font-size: 1.2em;
+    font-size: 15px;
     color: #426125;
     background-color: rgba(255, 255, 255, 0.53);
-    border-radius: 1em;
+    border-radius: 10px;
+    min-width: 20px;
 }
 
 .progressBarTrack {
