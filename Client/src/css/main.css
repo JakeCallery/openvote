@@ -41,10 +41,6 @@ input:focus {
 /*************************
 *** Header
 ***************************/
-.pageHeaderDiv {
-    width: 100%;
-}
-
 h1 {
     margin: 0.1em;
     padding: 0;
@@ -59,17 +55,35 @@ h3 {
     display: flex;
 }
 
-.pageHeaderDiv > h1 {
+.pageHeaderDiv {
+    width: 100%;
+    text-align: center;
+}
+
+.pageTitleContainerDiv {
+    display: inline-block;
+}
+
+.pageTitleContainerDiv > h1 {
     text-align: center;
     font-family: 'Monoton', cursive;
     font-size: 5em;
-    font-weight: 200;
+    font-weight: 600;
+    color: transparent;
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: linear-gradient(135deg, #faae40 1%,#faae40 14%,#f05a28 15%,#f05a28 28%,#be202f 29%,#be202f 43%,#392411 44%,#392411 58%,#be202f 59%,#be202f 73%,#f05a28 74%,#f05a28 88%,#faae40 89%,#faae40 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+
 }
 
 .pageHeaderDiv > h3 {
     text-align: center;
     font-family: 'Bungee', cursive;
     font-weight: 100;
+    line-height: 0.01em;
+    padding: 0;
+    margin: 0;
 }
 
 
@@ -101,10 +115,10 @@ h3 {
     font-weight: 100;
     font-size: 1.2em;
     border-radius: 8px;
-    background-color: #DD5431;
+    background-color: #F05A28;
     border: solid;
     padding: 0 0.5em 0 0.5em;
-    border-color: #FC940A;
+    border-color: #FAAE40;
     border-width: thick;
     color: #FFFFFF;
 }
@@ -127,6 +141,8 @@ button {
     background: -webkit-linear-gradient(-45deg, #faae40 1%,#faae40 14%,#f05a28 15%,#f05a28 28%,#be202f 29%,#be202f 43%,#392411 44%,#392411 58%,#be202f 59%,#be202f 73%,#f05a28 74%,#f05a28 88%,#faae40 89%,#faae40 100%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(135deg, #faae40 1%,#faae40 14%,#f05a28 15%,#f05a28 28%,#be202f 29%,#be202f 43%,#392411 44%,#392411 58%,#be202f 59%,#be202f 73%,#f05a28 74%,#f05a28 88%,#faae40 89%,#faae40 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#faae40', endColorstr='#faae40',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    border-radius: 10em;
+
 }
 
 .logoutButton {
@@ -150,16 +166,16 @@ button {
     color: #FFFFFF;
     text-align: center;
     text-decoration: none;
-    background: #85991B;
+    background: #436226;
+    border-radius: 1em;
     border: solid thick;
-    border-radius: 8px;
-    border-color: #B7A70F;
+    border-color: #7CA65A;
     outline: none;
 }
 
 .simpleButton:hover {
     color: #222222;
-    background: #a4b91c;
+    background: #537428;
 }
 
 .simpleButton:disabled {
