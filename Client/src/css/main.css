@@ -125,15 +125,15 @@ h3 {
 }
 
 .submitTopicButton {
-    height: 60px;
+    height: 44px;
     font-family: 'Cabin', sans-serif;
     font-weight: 100;
-    font-size: 25px;
+    font-size: 18px;
     border-radius: 8px;
     background-color: #F05A28;
     border: solid;
     border-color: #FAAE40;
-    border-width: thick;
+    border-width: 2px;
     color: #fff9f2;
     outline: none;
 }
@@ -157,21 +157,21 @@ h3 {
 
 
 .submitTopicField {
-    height: 50px;
+    height: 40px;
     font-family: 'Cabin', sans-serif;
     font-weight: 100;
-    font-size: 25px;
+    font-size: 18px;
     border-radius: 8px;
-    background-color: #392411;
+    background-color: #FFFFFF;
     border: solid;
     padding: 0 10px 0 10px;
     border-color: #FAAE40;
-    border-width: thick;
-    color: #FFFFFF;
+    border-width: 2px;
+    color: #000000;
 }
 
 .submitTopicFieldInstructions {
-    color: rgba(255, 255, 255, 0.50);
+    color: rgba(0, 0, 0, 0.50);
 }
 
 /*************************
@@ -180,8 +180,10 @@ h3 {
 .topicTitleP {
     font-family: 'Cabin', sans-serif;
     font-weight: 100;
-    font-size: 1.2em;
+    font-size: 25px;
     word-wrap: break-word;
+    margin-bottom: 5px;
+    color: #FFFFFF;
 }
 
 .topicTitleDiv {
@@ -189,7 +191,7 @@ h3 {
     justify-content: center;
     flex-direction: column;
     background-color: transparent;
-    width: 35%;
+    width: 80%;
     padding: 0.5em;
     text-align: left;
     border-radius: 1em;
@@ -207,7 +209,8 @@ h3 {
     border-right-style:none;
     border-left-style:none;
     border-bottom-style: solid;
-    border-width: 2px;
+    border-color: #BE202F;
+    border-width: 1px;
     padding-bottom: 10px;
 }
 
@@ -223,7 +226,9 @@ h3 {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    background-color: #DD5431;
 }
+
 
 
 /*************************
@@ -248,10 +253,7 @@ h3 {
     font-family: 'Cabin', sans-serif;
     font-weight: bolder;
     font-size: 15px;
-    color: #426125;
-    background-color: rgba(255, 255, 255, 0.53);
-    border-radius: 10px;
-    min-width: 20px;
+    color: #FFFFFF;
 }
 
 .progressBarTrack {
@@ -267,7 +269,7 @@ h3 {
     line-height: 50px;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
-    background-color: #BE202F;
+    background-color: #FAAE40;
     /* background-image: repeating-linear-gradient(to bottom, #BE202F 0, #BE202F 5px, #FFFFFF 5px, #FFFFFF 6px); */
 }
 
@@ -311,35 +313,44 @@ button {
 }
 
 .ribbonDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(164, 123, 165, 0.86);
+    background-color: #BE202F;
+    padding: 10px 0 10px 0;
+    border-top-color: #FFFFFF;
+    border-top-style: solid;
+    border-top-width: 3px;
 }
 
 
 .logoutButtonDiv {
-    width: 150px;
-    height: 50px;
-    padding: 0.1em;
-    background: #faae40; /* Old browsers */
-    background: -moz-linear-gradient(-45deg, #faae40 1%, #faae40 14%, #f05a28 15%, #f05a28 28%, #be202f 29%, #be202f 43%, #392411 44%, #392411 58%, #be202f 59%, #be202f 73%, #f05a28 74%, #f05a28 88%, #faae40 89%, #faae40 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(-45deg, #faae40 1%,#faae40 14%,#f05a28 15%,#f05a28 28%,#be202f 29%,#be202f 43%,#392411 44%,#392411 58%,#be202f 59%,#be202f 73%,#f05a28 74%,#f05a28 88%,#faae40 89%,#faae40 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(135deg, #faae40 1%,#faae40 14%,#f05a28 15%,#f05a28 28%,#be202f 29%,#be202f 43%,#392411 44%,#392411 58%,#be202f 59%,#be202f 73%,#f05a28 74%,#f05a28 88%,#faae40 89%,#faae40 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#faae40', endColorstr='#faae40',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-    border-radius: 15px;
+    width: 80px;
+    height: 20px;
+    /*
+    padding: 3px;
+    background: #faae40;
+    background: -moz-linear-gradient(-45deg, #faae40 1%, #faae40 14%, #f05a28 15%, #f05a28 28%, #be202f 29%, #be202f 43%, #392411 44%, #392411 58%, #be202f 59%, #be202f 73%, #f05a28 74%, #f05a28 88%, #faae40 89%, #faae40 100%);
+    background: -webkit-linear-gradient(-45deg, #faae40 1%,#faae40 14%,#f05a28 15%,#f05a28 28%,#be202f 29%,#be202f 43%,#392411 44%,#392411 58%,#be202f 59%,#be202f 73%,#f05a28 74%,#f05a28 88%,#faae40 89%,#faae40 100%);
+    background: linear-gradient(135deg, #faae40 1%,#faae40 14%,#f05a28 15%,#f05a28 28%,#be202f 29%,#be202f 43%,#392411 44%,#392411 58%,#be202f 59%,#be202f 73%,#f05a28 74%,#f05a28 88%,#faae40 89%,#faae40 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#faae40', endColorstr='#faae40',GradientType=1 );
+    border-radius: 5px;
     border: solid;
     border-color: #c94e0f;
     border-width: thick;
+    */
     cursor: pointer;
 
 }
 
 .logoutButton {
-    font-family: 'Monoton', cursive;
+    font-family: 'Cabin', sans-serif;
     font-weight: 100;
-    font-size: 30px;
+    font-size: 18px;
     color: #FFFFFF;
     text-align: center;
     text-decoration: none;
@@ -347,7 +358,10 @@ button {
     border: none;
     outline: none;
     cursor: pointer;
-    pointer-events: none;
+}
+
+.logoutButton:hover {
+    text-decoration: underline;
 }
 
 .simpleButton {
@@ -398,14 +412,15 @@ button {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#faae40', endColorstr='#faae40',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
     border-radius: 50px;
     border: solid;
-    border-color: #c94e0f;
-    border-width: thick;
+    border-color: #FFFFFF;
+    border-width: 2px;
     padding: auto;
     margin-right: 20px;
+    margin-left: 0px;
 }
 
 .voteButtonDiv:hover {
-    background: #ff5817;
+    background: #FAAE40;
     cursor: pointer;
 }
 

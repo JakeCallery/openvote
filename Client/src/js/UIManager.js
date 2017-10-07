@@ -32,12 +32,14 @@ class UIManager extends EventDispatcher {
         this.graphUl = this.doc.getElementById('graphUl');
         this.submitTopicField = this.doc.getElementById('submitTopicField');
         this.submitTopicButton = this.doc.getElementById('submitTopicButton');
-        this.logoutButtonDiv = this.doc.getElementById('logoutButtonDiv');
+        this.logoutButton = this.doc.getElementById('logoutButton');
+        //this.logoutButtonDiv = this.doc.getElementById('logoutButtonDiv');
 
         //Delegates
         this.submitTopicButtonClickDelegate = EventUtils.bind(self, self.handleSubmitTopicClick);
         this.updatedTopicsDelegate = EventUtils.bind(self, self.handleUpdatedTopics);
-        this.logoutButtonDivClickDelegate = EventUtils.bind(self, self.handleLogoutButtonDivClick);
+        //this.logoutButtonDivClickDelegate = EventUtils.bind(self, self.handleLogoutButtonDivClick);
+        this.logoutButtonClickDelegate = EventUtils.bind(self, self.handleLogoutButtonClick);
         this.topicFieldFocusDelegate = EventUtils.bind(self, self.handleTopicFieldFocus);
         this.topicFieldBlurDelegate = EventUtils.bind(self, self.handleTopicFieldBlur);
         this.topicFieldKeyPressDelegate = EventUtils.bind(self, self.handleTopicFieldKeyPress);
@@ -45,7 +47,8 @@ class UIManager extends EventDispatcher {
         //Events
         this.submitTopicButton.addEventListener('click', this.submitTopicButtonClickDelegate);
         this.topicsDM.addEventListener('updatedTopics', this.updatedTopicsDelegate);
-        this.logoutButtonDiv.addEventListener('click', this.logoutButtonDivClickDelegate);
+        //this.logoutButtonDiv.addEventListener('click', this.logoutButtonDivClickDelegate);
+        this.logoutButton.addEventListener('click', this.logoutButtonClickDelegate);
         this.submitTopicField.addEventListener('focus', this.topicFieldFocusDelegate);
         this.submitTopicField.addEventListener('blur', this.topicFieldBlurDelegate);
         this.submitTopicField.addEventListener('keypress', this.topicFieldKeyPressDelegate);
@@ -59,9 +62,15 @@ class UIManager extends EventDispatcher {
         this.submitTopicField.isEmpty = false;
     }
 
+    handleLogoutButtonClick($evt){
+        window.location = '/logout';
+    }
+
+    /*
     handleLogoutButtonDivClick($evt){
         window.location = '/logout';
     }
+    */
 
     handleTopicFieldFocus($evt) {
         if(this.submitTopicField.isEmpty === true){
@@ -222,7 +231,7 @@ class UIManager extends EventDispatcher {
         //li.appendChild(topicTitleP);
         li.appendChild(voteButtonDiv);
         li.appendChild(topicTitleDiv);
-        li.appendChild(progressBarDiv);
+        topicTitleDiv.appendChild(progressBarDiv);
 
         return li;
     }
