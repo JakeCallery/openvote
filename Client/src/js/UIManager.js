@@ -32,12 +32,12 @@ class UIManager extends EventDispatcher {
         this.graphUl = this.doc.getElementById('graphUl');
         this.submitTopicField = this.doc.getElementById('submitTopicField');
         this.submitTopicButton = this.doc.getElementById('submitTopicButton');
-        this.logoutButton = this.doc.getElementById('logoutButton');
+        this.logoutButtonDiv = this.doc.getElementById('logoutButtonDiv');
 
         //Delegates
         this.submitTopicButtonClickDelegate = EventUtils.bind(self, self.handleSubmitTopicClick);
         this.updatedTopicsDelegate = EventUtils.bind(self, self.handleUpdatedTopics);
-        this.logoutButtonClickDelegate = EventUtils.bind(self, self.handleLogoutButtonClick);
+        this.logoutButtonDivClickDelegate = EventUtils.bind(self, self.handleLogoutButtonDivClick);
         this.topicFieldFocusDelegate = EventUtils.bind(self, self.handleTopicFieldFocus);
         this.topicFieldBlurDelegate = EventUtils.bind(self, self.handleTopicFieldBlur);
         this.topicFieldKeyPressDelegate = EventUtils.bind(self, self.handleTopicFieldKeyPress);
@@ -45,7 +45,7 @@ class UIManager extends EventDispatcher {
         //Events
         this.submitTopicButton.addEventListener('click', this.submitTopicButtonClickDelegate);
         this.topicsDM.addEventListener('updatedTopics', this.updatedTopicsDelegate);
-        this.logoutButton.addEventListener('click', this.logoutButtonClickDelegate);
+        this.logoutButtonDiv.addEventListener('click', this.logoutButtonDivClickDelegate);
         this.submitTopicField.addEventListener('focus', this.topicFieldFocusDelegate);
         this.submitTopicField.addEventListener('blur', this.topicFieldBlurDelegate);
         this.submitTopicField.addEventListener('keypress', this.topicFieldKeyPressDelegate);
@@ -59,7 +59,7 @@ class UIManager extends EventDispatcher {
         this.submitTopicField.isEmpty = false;
     }
 
-    handleLogoutButtonClick($evt){
+    handleLogoutButtonDivClick($evt){
         window.location = '/logout';
     }
 
