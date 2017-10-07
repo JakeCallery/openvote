@@ -66,12 +66,6 @@ class UIManager extends EventDispatcher {
         window.location = '/logout';
     }
 
-    /*
-    handleLogoutButtonDivClick($evt){
-        window.location = '/logout';
-    }
-    */
-
     handleTopicFieldFocus($evt) {
         if(this.submitTopicField.isEmpty === true){
             this.submitTopicField.value = '';
@@ -139,12 +133,13 @@ class UIManager extends EventDispatcher {
     handleSubmitTopicClick($evt) {
         l.debug('Caught Submit Button Click');
 
-        if(this.submitTopicField.isEmpty === false && StringUtils.stripWhiteSpace(this.submitTopicField.value) !== ''){
+        let value = this.submitTopicField.value;
+        if(this.submitTopicField.isEmpty === false && StringUtils.stripWhiteSpace(value) !== ''){
             this.submitTopicField.value = '';
             this.submitTopicField.dispatchEvent(new Event('blur'));
 
             $evt.target.disabled = true;
-            this.uigeb.dispatchUIEvent('requestSubmitTopic', this.submitTopicField.value, () => {
+            this.uigeb.dispatchUIEvent('requestSubmitTopic', value, () => {
                 $evt.target.disabled = false;
             });
         } else {

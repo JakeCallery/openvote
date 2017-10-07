@@ -1,5 +1,4 @@
 -- Planned --
-Topic Submission bug (sends the wrong text)
 
 Sanitize serverside socket communication (ping hijack)
 
@@ -69,3 +68,5 @@ Full Site Styling
 
 Add Bottom Ribbon
   (always there, contains logout button, random messages?)
+
+Topic Submission bug (sends the wrong text)
