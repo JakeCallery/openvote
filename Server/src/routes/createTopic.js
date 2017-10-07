@@ -7,15 +7,22 @@ const VoteManager = require('../managers/VoteManager');
 const ClientsManager = require('../managers/ClientsManager');
 const neo4j = require('neo4j-driver').v1;
 
-router.post('/', (req, res) => {
-    console.log('Caught Cast Vote Request');
+const MAX_TOPIC_NAME_LENGTH = 200;
 
+router.post('/', (req, res) => {
     let cm = new ClientsManager(null);
 
     promiseRetry((retry, attempt) => {
-        console.log('Create Topic Attempt: ' + attempt);
 
-        //TODO: Sanitize req inputs
+        console.log('Topic Length: ', req.body.topicName.length);
+
+        //Limit topic size:
+        if(req.body.topicName.length > MAX_TOPIC_NAME_LENGTH){
+            console.log('Topic Name Sent too long, truncating...:' + req.body.topicName.length);
+        }
+
+        let topic = req.body.topicName.substring(0, MAX_TOPIC_NAME_LENGTH);
+
         return TopicManager.createTopic(req.body.topicName)
         .then(($dbResult) => {
             let topic = $dbResult.records[0].get('topic');
