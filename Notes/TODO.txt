@@ -20,6 +20,8 @@ Create Constraints on DB (no duplicate topic/vote id's etc..)
 SSL Cert auto renew
 Nightly Backups (more than just nightly snapshot)
 
+Sanitize serverside socket communication (ping hijack)
+
 -- Low Priority --
 Promise polyfill for IE9 (Do we even care?)
 

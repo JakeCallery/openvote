@@ -10,7 +10,8 @@ module.exports = {
     entry: {
         indexEntry:'./js/indexPage.js',
         apiTestEntry:'./js/apiTestPage.js',
-        loginEntry:'./js/loginPage.js'
+        loginEntry:'./js/loginPage.js',
+        notAuthorizedEntry: './js/notAuthorized.js'
     },
 
     output: {
@@ -98,6 +99,16 @@ module.exports = {
                 'loginEntry'
             ]
         }),
+
+        new HtmlWebpackPlugin({
+            filename: 'notAuthorized.html',
+            template: 'html/notAuthorized.html',
+            hash: true,
+            chunks: [
+                'notAuthorizedEntry'
+            ]
+        }),
+
 
         /*
         new ImageminPlugin({
