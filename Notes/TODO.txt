@@ -1,14 +1,13 @@
 -- Planned --
+Topic Submission bug (sends the wrong text)
 
-Full Site Styling
-  Style Index Page
-  Style Login Page
-  Style Unauthorized Page
+Sanitize serverside socket communication (ping hijack)
 
-Add Bottom Ribbon
-  (always there, contains logout button, random messages?)
+media query break / change header font weight
 
-Error Message (bottom ribbon)
+enable client side debugging with query string
+
+limit topic submission length
 
 deployment
   dos2unix on .sh scripts
@@ -20,10 +19,10 @@ Create Constraints on DB (no duplicate topic/vote id's etc..)
 SSL Cert auto renew
 Nightly Backups (more than just nightly snapshot)
 
-Sanitize serverside socket communication (ping hijack)
 
 -- Low Priority --
 Promise polyfill for IE9 (Do we even care?)
+Error Message (bottom ribbon)
 
 --- DONE ---
 Create DB
@@ -62,3 +61,11 @@ Don't submit empty topic
 clear topic field on submit
 
 get new topics and vote counts on websocket reconnect
+
+Full Site Styling
+  Style Index Page
+  Style Login Page
+  Style Unauthorized Page
+
+Add Bottom Ribbon
+  (always there, contains logout button, random messages?)
