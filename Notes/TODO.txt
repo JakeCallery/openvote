@@ -5,12 +5,6 @@ Full Site Styling
   Style Login Page
   Style Unauthorized Page
 
-Don't submit empty topic
-
-instructions in topic field (goes away when active)
-
-clear topic field on submit
-
 Error Message (bottom ribbon)
 
 get new topics and vote counts on websocket reconnect
@@ -52,3 +46,10 @@ Setup https/ssl
 Helmet integration
 
 Development Environment
+
+instructions in topic field (goes away when active)
+
+Don't submit empty topic
+
+clear topic field on submit
+

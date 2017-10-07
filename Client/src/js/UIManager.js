@@ -60,12 +60,10 @@ class UIManager extends EventDispatcher {
     }
 
     handleLogoutButtonClick($evt){
-        l.debug('Caught Logout Button Click');
         window.location = '/logout';
     }
 
     handleTopicFieldFocus($evt) {
-        l.debug('Focus!');
         if(this.submitTopicField.isEmpty === true){
             this.submitTopicField.value = '';
         }
@@ -74,8 +72,6 @@ class UIManager extends EventDispatcher {
     }
 
     handleTopicFieldBlur($evt) {
-        l.debug('Blur!');
-
         let curValue = StringUtils.stripWhiteSpace(this.submitTopicField.value);
 
         if(curValue === ''){
@@ -133,10 +129,18 @@ class UIManager extends EventDispatcher {
 
     handleSubmitTopicClick($evt) {
         l.debug('Caught Submit Button Click');
-        $evt.target.disabled = true;
-        this.uigeb.dispatchUIEvent('requestSubmitTopic', this.submitTopicField.value, () => {
-             $evt.target.disabled = false;
-        });
+
+        if(this.submitTopicField.isEmpty === false && StringUtils.stripWhiteSpace(this.submitTopicField.value) !== ''){
+            this.submitTopicField.value = '';
+            this.submitTopicField.dispatchEvent(new Event('blur'));
+
+            $evt.target.disabled = true;
+            this.uigeb.dispatchUIEvent('requestSubmitTopic', this.submitTopicField.value, () => {
+                $evt.target.disabled = false;
+            });
+        } else {
+            l.error('Topic Field Is Empty');
+        }
     }
 
 

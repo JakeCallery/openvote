@@ -42,7 +42,7 @@ class WSManager extends EventDispatcher {
 
             //Start ping
             this.pingIntervalId = setInterval(() => {
-                l.debug('Sending Ping');
+                //l.debug('Sending Ping');
                 this.sendPing();
             }, 2000);
 
@@ -132,8 +132,8 @@ class WSManager extends EventDispatcher {
     }
 
     sendPing(){
-        l.debug('Connection Ready State: ', this.connection.readyState);
-        l.debug('Constant: ', this.connection.CONNECTING);
+        //l.debug('Connection Ready State: ', this.connection.readyState);
+        //l.debug('Constant: ', this.connection.CONNECTING);
         if(
             this.connection.readyState === this.connection.CLOSING ||
             this.connection.readyState === this.connection.CLOSED
@@ -144,7 +144,7 @@ class WSManager extends EventDispatcher {
         }
 
         if(this.connection.readyState === this.connection.OPEN){
-            l.debug('Connection was last Open, sending ping...');
+            //l.debug('Connection was last Open, sending ping...');
             try {
                 this.connection.send('ping');
             } catch ($error) {
