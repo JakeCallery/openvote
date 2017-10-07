@@ -1,6 +1,6 @@
 {
     "name": "openvoteclient",
-    "version": "0.8.134",
+    "version": "0.8.135",
     "description": "janky quick voting system",
     "main": "index.js",
     "dependencies": {

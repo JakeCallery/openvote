@@ -10,6 +10,11 @@ Add Bottom Ribbon
 
 Error Message (bottom ribbon)
 
+deployment
+  dos2unix on .sh scripts
+  dos2unix on bash_profile
+  dos2unix on remoteScripts
+
 Create Constraints on DB (no duplicate topic/vote id's etc..)
 
 SSL Cert auto renew
