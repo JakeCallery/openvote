@@ -350,24 +350,24 @@ button {
 }
 
 
-
 .voteButtonDiv {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    background: linear-gradient(135deg, #faae40 1%,#faae40 14%,#f05a28 15%,#f05a28 28%,#be202f 29%,#be202f 43%,#392411 44%,#392411 58%,#be202f 59%,#be202f 73%,#f05a28 74%,#f05a28 88%,#faae40 89%,#faae40 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    border-radius: 10px;
+    padding: 5px;
 }
 
 .voteButton {
-    font-family: 'Cabin', sans-serif;
+
+    font-family: 'Monoton', sans-serif;
     font-weight: 100;
-    font-size: 1.2em;
-    border-radius: 8px;
+    font-size: 1.5em;
     background-color: #F05A28;
-    border: solid;
-    border-color: #FAAE40;
-    border-width: thick;
+    border-radius: 8px;
+    border: none;
     color: #fff9f2;
-    padding: 0.5em;
     outline: none;
 }
 
