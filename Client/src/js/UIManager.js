@@ -220,9 +220,9 @@ class UIManager extends EventDispatcher {
         progressBarTrack.appendChild(progressBarFill);
         progressBarDiv.appendChild(progressBarTrack);
         //li.appendChild(topicTitleP);
+        li.appendChild(voteButtonDiv);
         li.appendChild(topicTitleDiv);
         li.appendChild(progressBarDiv);
-        li.appendChild(voteButtonDiv);
 
         return li;
     }
