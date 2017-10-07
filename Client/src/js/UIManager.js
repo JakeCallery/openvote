@@ -118,9 +118,13 @@ class UIManager extends EventDispatcher {
         li.topicId = $topic.topicId;
         li.voteCount = $topic.voteCount;
 
+        let topicTitleDiv = this.doc.createElement('div');
+        DOMUtils.addClass(topicTitleDiv, 'topicTitleDiv');
+
         let topicTitleP = this.doc.createElement('p');
         DOMUtils.addClass(topicTitleP, 'topicTitleP');
         topicTitleP.innerHTML = $topic.topicName;
+        topicTitleDiv.appendChild(topicTitleP);
 
         let progressBarDiv = this.doc.createElement('div');
         DOMUtils.addClass(progressBarDiv, 'progressBarDiv');
@@ -173,7 +177,8 @@ class UIManager extends EventDispatcher {
         progressBarFill.appendChild(progressBarSpan);
         progressBarTrack.appendChild(progressBarFill);
         progressBarDiv.appendChild(progressBarTrack);
-        li.appendChild(topicTitleP);
+        //li.appendChild(topicTitleP);
+        li.appendChild(topicTitleDiv);
         li.appendChild(progressBarDiv);
         li.appendChild(voteButtonDiv);
 

@@ -1,12 +1,21 @@
+-- Planned --
+
 Full Site Styling
   Style Index Page
   Style Login Page
   Style Unauthorized Page
 
+Error Message (bottom ribbon)
+
+get new topics and vote counts on websocket reconnect
+
 Create Constraints on DB (no duplicate topic/vote id's etc..)
 
 SSL Cert auto renew
 Nightly Backups (more than just nightly snapshot)
+
+-- Low Priority --
+Promise polyfill for IE9 (Do we even care?)
 
 --- DONE ---
 Create DB
