@@ -12,6 +12,7 @@ import RequestManager from "./RequestManager";
 import Status from 'general/Status';
 import UIGEB from 'general/UIGEB';
 import TopicsDataModel from 'TopicsDataModel';
+import DOMUtils from 'jac/utils/DOMUtils';
 
 //https://www.npmjs.com/package/sanitize-html
 import sanitizeHtml from 'sanitizeHtml/sanitize-html.min';
@@ -30,6 +31,9 @@ let readyManager = new ReadyManager();
 readyManager.ready()
     .then(($response) => {
     l.debug('READY!');
+
+    document.body.style.opacity='1';
+    DOMUtils.addClass(document.body, 'bodyFadeIn');
 
     //Set up event buses
     let geb = new GlobalEventBus();

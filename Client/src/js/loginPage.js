@@ -8,6 +8,7 @@ import GlobalEventBus from 'jac/events/GlobalEventBus';
 import WSManager from 'WSManager';
 import ReadyManager from 'ready/ReadyManager';
 import UIManager from 'UIManager';
+import DOMUtils from 'jac/utils/DOMUtils';
 
 //Import through loaders
 import '../css/normalize.css';
@@ -21,6 +22,8 @@ let readyManager = new ReadyManager();
 readyManager.ready()
     .then(($response) => {
         l.debug('READY!');
+        document.body.style.opacity='1';
+        DOMUtils.addClass(document.body, 'bodyFadeIn');
 
         let loginButton = document.getElementById('loginButton');
         loginButton.addEventListener('click', ($evt) => {

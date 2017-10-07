@@ -189,14 +189,14 @@ class UIManager extends EventDispatcher {
         //DOMUtils.addClass(voteButton, 'simpleButton');
         DOMUtils.addClass(voteButton, 'voteButton');
         voteButton.innerHTML = 'Vote';
-        voteButton.handleClick = ($evt) => {
+        voteButtonDiv.handleClick = ($evt) => {
             l.debug('vote Click: ', $topic.topicId);
             $evt.target.disabled = true;
             this.uigeb.dispatchUIEvent('requestCastVote', $topic.topicId, () => {
                 $evt.target.disabled = false;
             });
         };
-        voteButton.addEventListener('click', voteButton.handleClick);
+        voteButtonDiv.addEventListener('click', voteButtonDiv.handleClick);
 
         //Custom functions
         li.updateVoteCount = ($newCount, $countPercent) => {

@@ -4,6 +4,7 @@ import VerboseLevel from 'jac/logger/VerboseLevel';
 import LogLevel from 'jac/logger/LogLevel';
 import ConsoleTarget from 'jac/logger/ConsoleTarget';
 import ReadyManager from 'ready/ReadyManager';
+import DOMUtils from 'jac/utils/DOMUtils';
 
 //Import through loaders
 import '../css/normalize.css';
@@ -17,6 +18,8 @@ let readyManager = new ReadyManager();
 readyManager.ready()
     .then(($response) => {
         l.debug('READY!');
+        document.body.style.opacity='1';
+        DOMUtils.addClass(document.body, 'bodyFadeIn');
 })
 .catch(($error) => {
     l.error('Ready ERROR: ', $error);

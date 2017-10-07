@@ -39,6 +39,25 @@ input:focus {
 }
 
 /*************************
+*** Animations
+***************************/
+@keyframes fadeIn {
+    from {
+        opacity:0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.bodyFadeIn {
+    opacity: 0;
+    animation: fadeIn ease-in 1;
+    animation-duration: 0.5s;
+    animation-delay: 0s;
+}
+/*************************
 *** Header
 ***************************/
 h1 {
@@ -371,7 +390,12 @@ button {
 }
 
 .voteButtonDiv:hover {
-    background: #FFFFFF;
+    background: #ff5817;
+    cursor: pointer;
+}
+
+.voteButtonDiv:active {
+    background: #ff6b00;
 }
 
 .voteButton {
@@ -386,23 +410,23 @@ button {
     text-decoration: none;
     padding: 0;
     margin: 0;
+    pointer-events: none;
+    -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+    -moz-user-select: none; /* mozilla browsers */
+    -khtml-user-select: none; /* webkit (konqueror) browsers */
+    -ms-user-select: none; /* IE10+ */
 }
 
-
-.voteButton:hover {
-    color: #FFFFFF;
-    background: #ff5817;
-}
 
 .voteButton:disabled {
     color: #949494;
-    background: rgba(240, 90, 40, 0.42);
+    background: rgba(255, 255, 255, 0.42);
     pointer-events: none;
     cursor: default;
 }
 
 .voteButton:active {
-    background: #F05A28;
+    background: transparent;
     outline: none;
 }
 
