@@ -10,8 +10,6 @@ Add Bottom Ribbon
 
 Error Message (bottom ribbon)
 
-get new topics and vote counts on websocket reconnect
-
 Create Constraints on DB (no duplicate topic/vote id's etc..)
 
 SSL Cert auto renew
@@ -56,3 +54,4 @@ Don't submit empty topic
 
 clear topic field on submit
 
+get new topics and vote counts on websocket reconnect

@@ -137,6 +137,7 @@ readyManager.ready()
     geb.addEventListener('wsOpened', ($evt) => {
          l.debug('Caught Websocket Connected');
          l.debug('Starting Ping');
+        geb.dispatchEvent(new JacEvent('requestnewtopicdata'));
     });
 
     //Kick off (load initial topics)
