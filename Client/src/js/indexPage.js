@@ -132,9 +132,7 @@ readyManager.ready()
 
     geb.addEventListener('newRemoteTopicData', ($evt) => {
         let topic = $evt.data;
-        console.log('Topic Name BEFORE Sanitize: ', topic.topicName);
         topic.topicName = sanitizeHtml(topic.topicName);
-        console.log('Topic Name After Sanitize: ', topic.topicName);
         topicsDM.addTopic(topic);
     });
 

@@ -6,8 +6,6 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    console.log('Caught login page request...');
-
     let isLoggedIn = (typeof(req.user) !== 'undefined');
 
     if(isLoggedIn) {

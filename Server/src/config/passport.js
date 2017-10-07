@@ -19,7 +19,6 @@ const User = require('../models/User');
 
 module.exports = function(passport){
     passport.serializeUser((user, done) => {
-        console.log('Serialize User Called: ', user.id);
         let sessionUser = {
             id: user.id,
             firstName: user.firstName,
@@ -52,15 +51,13 @@ module.exports = function(passport){
                 };
 
                 promiseRetry((retry, attempt) => {
-                    console.log('findOrCreate Attempt: ' + attempt);
                     User.findOrCreate(idObj)
                     .then((user) => {
-                        console.log('******** Find or Create User: ', user.id);
                         done(null, user);
                     })
                     .catch(($error) => {
                       if($error.fields[0].code == 'Neo.ClientError.Schema.ConstraintValidationFailed'){
-                            console.log('Will retry');
+                            console.error('Duplicate User ID, retrying');
                             retry('Create User Duplicate Id');
                         } else {
                             console.error('Error: ', $error);

@@ -51,7 +51,6 @@ class TopicManager {
             session.close();
             let numRecords = $dbResult.records.length;
             if(numRecords === 1){
-                console.log('Num Records (should be 1): ', numRecords);
                 return new Promise((resolve, reject) => {
                     resolve($dbResult);
                 });
@@ -64,7 +63,7 @@ class TopicManager {
         .catch(($error) => {
             session.close();
             return new Promise((resolve, reject) => {
-                console.error('Create Topic Error');
+                console.error('Create Topic Error', $error);
                 reject($error);
             });
         });

@@ -28,7 +28,6 @@ class VoteManager {
             session.close();
             let numRecords = $dbResult.records.length;
             if(numRecords === 1){
-                console.log('Num Records (should be 1): ', numRecords);
                 return new Promise((resolve, reject) => {
                     resolve($dbResult);
                 });

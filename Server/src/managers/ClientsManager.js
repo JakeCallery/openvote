@@ -43,10 +43,8 @@ class ClientsManager {
                     console.log('Desc: ', $reason);
 
                     //Remove connection
-                    console.log('Removing Connection from pool');
                     for(let i = 0; i < this.clientList.length; i++){
                         if(this.clientList[i] === $connection){
-                            console.log('Removing Connection: ', i);
                             this.clientList.splice(i, 1);
                             break;
                         }
@@ -73,8 +71,6 @@ class ClientsManager {
 
     sendMessage($sourceConnection, $dataObj){
         //Send message to other clients
-        console.log('Sending: ', JSON.stringify($dataObj));
-
         for(let i = 0; i < this.clientList.length; i++){
             let conn = this.clientList[i];
             if(conn !== $sourceConnection) {
@@ -89,9 +85,6 @@ class ClientsManager {
                 return this.clientList[i];
             }
         }
-
-        console.log('Could not find connection, returning null');
-
         return null;
     }
 

@@ -6,18 +6,11 @@ const ClientsManager = require('../managers/ClientsManager');
 const neo4j = require('neo4j-driver').v1;
 
 router.post('/', (req, res) => {
-    console.log('Caught Cast Vote Request');
-
     let cm = new ClientsManager(null);
 
     promiseRetry((retry, attempt) => {
-        console.log('Cast Vote Attempt: ' + attempt);
-
-        //TODO: Sanitize req inputs
         return VoteManager.castVote(req.body.topicId)
         .then(($dbResult) => {
-            console.log('Cast Vote DBResult: ' + $dbResult);
-
             let vote = $dbResult.records[0].get('vote');
             let topic = $dbResult.records[0].get('topic');
             let voteCount = $dbResult.records[0].get('voteCount');
@@ -45,13 +38,12 @@ router.post('/', (req, res) => {
                 voteCount: voteCount
             };
 
-            console.log('Source Connection Id: ', req.body.connectionId);
             cm.notifyClientsOfVote(req.body.connectionId, resObj.data);
             res.status(200).json(resObj);
         })
         .catch(($error) => {
             if ($error.fields[0].code === 'Neo.ClientError.Schema.ConstraintValidationFailed') {
-                console.log('duplicate vote id, retrying: ' + attempt);
+                console.error('duplicate vote id, retrying: ' + attempt);
                 retry('cast vote duplicate id');
             } else {
                 console.error('Cast Vote Failed: ', $error);

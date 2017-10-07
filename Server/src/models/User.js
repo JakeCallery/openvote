@@ -3,8 +3,6 @@
  */
 'use strict';
 
-//const db = require('../config/db');
-
 class User {
     constructor($data) {
         this.data = $data || {};
@@ -28,8 +26,6 @@ class User {
     }
 
     updateFromGoogleIdObj($idObj) {
-        console.log('FromGoogleData: ', $idObj);
-
         this.data.firstName = $idObj.firstName;
         this.data.lastName = $idObj.lastName;
         this.data.profileImg = $idObj.profileImg;
@@ -99,7 +95,6 @@ class User {
 
     static findOrCreate($idObj) {
         if ($idObj.hasOwnProperty('google')) {
-            console.log('Checking Email address: ' + $idObj.google.email);
             return new Promise((resolve, reject) => {
                 let newUser = new User();
                 newUser.updateFromGoogleIdObj($idObj.google);

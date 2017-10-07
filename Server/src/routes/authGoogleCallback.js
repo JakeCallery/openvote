@@ -15,8 +15,6 @@ router.get('/', passport.authenticate('google', {failureRecirect: '/loginFailed'
         successRedirect = req.session.initialPath;
         delete req.session.initialPath;
 
-        console.log('Login Redirect Path: ', successRedirect);
-
     } else {
         //default to root
         successRedirect = '/';
