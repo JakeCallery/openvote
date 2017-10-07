@@ -18,6 +18,14 @@ body {
     box-sizing: border-box;
 }
 
+textarea:focus {
+    outline: none;
+}
+
+input:focus {
+    outline: none;
+}
+
 .displayNone {
     display: none;
 }
@@ -31,31 +39,111 @@ body {
 }
 
 /*************************
+*** Header
+***************************/
+.pageHeaderDiv {
+    width: 100%;
+}
+
+h1 {
+    margin: 0.1em;
+    padding: 0;
+}
+
+h3 {
+    margin: 0.1em;
+    padding: 0;
+}
+
+.headline {
+    display: flex;
+}
+
+.pageHeaderDiv > h1 {
+    text-align: center;
+    font-family: 'Monoton', cursive;
+    font-size: 5em;
+    font-weight: 200;
+}
+
+.pageHeaderDiv > h3 {
+    text-align: center;
+    font-family: 'Bungee', cursive;
+    font-weight: 100;
+}
+
+
+
+/*************************
+*** Submit topic
+***************************/
+.secondSectionDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.submitTopicHeader {
+    font-family: 'Cabin', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.submitTopicDiv {
+}
+
+.submitTopicButton {
+
+}
+
+.submitTopicField {
+    height: 2em;
+    font-family: 'Cabin', sans-serif;
+    font-weight: 100;
+    font-size: 1.2em;
+    border-radius: 8px;
+    background-color: #DD5431;
+    border: solid;
+    padding: 0 0.5em 0 0.5em;
+    border-color: #FC940A;
+    border-width: thick;
+    color: #FFFFFF;
+}
+
+
+/*************************
 *** Buttons
 ***************************/
-
 button {
     cursor: pointer;
 }
 
+.logoutButtonDiv {
+    margin-top: 1em;
+}
+
+.logoutButton {
+
+}
+
 .simpleButton {
-    width:100px;
-    height:40px;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: bolder;
-    font-size: 10pt;
-    color: #000000;
+    width: 8.5em;
+    height: 2.5em;
+    font-family: 'Cabin', sans-serif;
+    font-weight: 600;
+    font-size: 0.9em;
+    color: #FFFFFF;
     text-align: center;
     text-decoration: none;
-    background: #bcc2c6;
-    border: 0;
-    border-radius: 7px;
+    background: #85991B;
+    border: solid thick;
+    border-radius: 8px;
+    border-color: #B7A70F;
     outline: none;
 }
 
 .simpleButton:hover {
     color: #222222;
-    background: #e0e6ea;
+    background: #a4b91c;
 }
 
 .simpleButton:disabled {
@@ -63,14 +151,6 @@ button {
     background: #454545;
     pointer-events: none;
     cursor: default;
-}
-
-.pageHeaderDiv {
-    width: 100%;
-}
-
-.pageHeaderDiv > h1 {
-    text-align: center;
 }
 
 .graphContainerDiv {
@@ -124,10 +204,3 @@ button {
 
 }
 
-.submitTopicButton {
-
-}
-
-.submitTopicField {
-
-}

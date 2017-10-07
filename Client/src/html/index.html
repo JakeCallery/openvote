@@ -3,23 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
-    <title>OpenVote</title>
+    <link href="https://fonts.googleapis.com/css?family=Monoton|Bungee|Cabin" rel="stylesheet">
+    <title>Technical Development Voting System</title>
 </head>
 <body>
     <div class="pageHeaderDiv">
-        <h1>Open Vote</h1>
+        <h1>Tech Vote</h1>
+        <h3>Technical Development Voting System 9000</h3>
+        <br>
+
     </div>
 <br>
-    <button id="logoutButton" class="simpleButton">Log Out</button>
 
+    <div class="secondSectionDiv">
+        <div class="submitTopicDiv">
+            <h2 class="submitTopicHeader">Submit new topic</h2>
+            <input type="text" id="submitTopicField" class="submitTopicField">
+            <button id="submitTopicButton" class="simpleButton submitTopicButton">Submit Topic</button>
+        </div>
+
+        <div>
+            <button id="logoutButton" class="simpleButton logoutButton">Log Out</button>
+        </div>
+    </div>
 <br>
     <div class="graphContainerDiv">
         <ul id="graphUl" class="graphUl"></ul>
     </div>
-<br>
-    <h2>Submit new topic</h2>
-    <input type="text" id="submitTopicField" class="submitTopicField">
-    <br>
-    <button id="submitTopicButton" class="simpleButton submitTopicButton">Submit Topic</button>
+
 </body>
 </html>
