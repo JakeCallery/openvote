@@ -106,11 +106,39 @@ h3 {
 }
 
 .submitTopicButton {
-
+    font-family: 'Cabin', sans-serif;
+    font-weight: 100;
+    font-size: 1.2em;
+    border-radius: 8px;
+    background-color: #F05A28;
+    border: solid;
+    border-color: #FAAE40;
+    border-width: thick;
+    color: #fff9f2;
+    padding: 0.5em;
+    outline: none;
 }
 
+.submitTopicButton:hover {
+    color: #FFFFFF;
+    background: #ff5817;
+}
+
+.submitTopicButton:disabled {
+    color: #949494;
+    background: rgba(240, 90, 40, 0.42);
+    pointer-events: none;
+    cursor: default;
+}
+
+.submitTopicButton:active {
+    background: #F05A28;
+    outline: none;
+}
+
+
 .submitTopicField {
-    height: 2em;
+    height: 2.5em;
     font-family: 'Cabin', sans-serif;
     font-weight: 100;
     font-size: 1.2em;
@@ -121,6 +149,10 @@ h3 {
     border-color: #FAAE40;
     border-width: thick;
     color: #FFFFFF;
+}
+
+.submitTopicFieldInstructions {
+    color: rgba(255, 255, 255, 0.79);
 }
 
 /*************************
@@ -140,7 +172,7 @@ h3 {
     background-color: transparent;
     width: 35%;
     padding: 0.5em;
-    text-align: right;
+    text-align: left;
     border-radius: 1em;
 }
 

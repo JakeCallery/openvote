@@ -8,6 +8,7 @@ import UIGEB from 'general/UIGEB';
 import RequestManager from 'RequestManager';
 import Status from 'general/Status';
 import TopicsDataModel from 'TopicsDataModel';
+import StringUtils from 'jac/utils/StringUtils';
 
 class UIManager extends EventDispatcher {
     constructor($doc){
@@ -24,6 +25,8 @@ class UIManager extends EventDispatcher {
         l.debug('UI Manager Init');
         let self = this;
 
+        this.instructionsText = 'Enter New Topic Here';
+
         //DOM Elements
         this.graphContainerDiv = this.doc.getElementById('graphContainerDiv');
         this.graphUl = this.doc.getElementById('graphUl');
@@ -35,16 +38,51 @@ class UIManager extends EventDispatcher {
         this.submitTopicButtonClickDelegate = EventUtils.bind(self, self.handleSubmitTopicClick);
         this.updatedTopicsDelegate = EventUtils.bind(self, self.handleUpdatedTopics);
         this.logoutButtonClickDelegate = EventUtils.bind(self, self.handleLogoutButtonClick);
+        this.topicFieldFocusDelegate = EventUtils.bind(self, self.handleTopicFieldFocus);
+        this.topicFieldBlurDelegate = EventUtils.bind(self, self.handleTopicFieldBlur);
+        this.topicFieldKeyPressDelegate = EventUtils.bind(self, self.handleTopicFieldKeyPress);
 
         //Events
         this.submitTopicButton.addEventListener('click', this.submitTopicButtonClickDelegate);
         this.topicsDM.addEventListener('updatedTopics', this.updatedTopicsDelegate);
         this.logoutButton.addEventListener('click', this.logoutButtonClickDelegate);
+        this.submitTopicField.addEventListener('focus', this.topicFieldFocusDelegate);
+        this.submitTopicField.addEventListener('blur', this.topicFieldBlurDelegate);
+        this.submitTopicField.addEventListener('keypress', this.topicFieldKeyPressDelegate);
+
+        //Setup
+        this.submitTopicField.value = this.instructionsText;
+        this.submitTopicField.isEmpty = true;
+    }
+
+    handleTopicFieldKeyPress($evt){
+        this.submitTopicField.isEmpty = false;
     }
 
     handleLogoutButtonClick($evt){
         l.debug('Caught Logout Button Click');
         window.location = '/logout';
+    }
+
+    handleTopicFieldFocus($evt) {
+        l.debug('Focus!');
+        if(this.submitTopicField.isEmpty === true){
+            this.submitTopicField.value = '';
+        }
+
+        DOMUtils.removeClass(this.submitTopicField, 'submitTopicFieldInstructions');
+    }
+
+    handleTopicFieldBlur($evt) {
+        l.debug('Blur!');
+
+        let curValue = StringUtils.stripWhiteSpace(this.submitTopicField.value);
+
+        if(curValue === ''){
+            this.submitTopicField.isEmpty = true;
+            DOMUtils.addClass(this.submitTopicField, 'submitTopicFieldInstructions');
+            this.submitTopicField.value = this.instructionsText;
+        }
     }
 
     handleUpdatedTopics($evt){

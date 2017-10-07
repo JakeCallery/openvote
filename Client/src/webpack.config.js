@@ -2,8 +2,8 @@
 
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-//const WebpackAutoInject = require('./forWebPack/webpack-auto-inject-version');
-//const ImageminPlugin = require('imagemin-webpack-plugin').default;
+const WebpackAutoInject = require('./forWebPack/webpack-auto-inject-version');
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
@@ -98,6 +98,7 @@ module.exports = {
                 'loginEntry'
             ]
         }),
+
         /*
         new ImageminPlugin({
 
@@ -110,14 +111,14 @@ module.exports = {
             },
             sourceMap: true
         }),
-*/
-/*
+        */
+
         new WebpackAutoInject({
             autoIncrease: true,
             injectByTag: true,
             injectAsComment: true
         }),
-*/
+
         function() {
             this.plugin('watch-run', function(watching, callback) {
                 console.log('Begin Compile At ' + new Date());
