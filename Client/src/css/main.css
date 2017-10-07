@@ -395,9 +395,11 @@ button {
     text-align: center;
     font-family: 'Monoton', cursive;
     font-size: 3.5em;
-    font-weight: bold;
+    font-weight: 600;
     color: transparent;
     /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: -moz-repeating-linear-gradient(-45deg, #faae40 0px,#faae40 10px,#f05a28 10px,#f05a28 20px,#be202f 20px,#be202f 30px,#392411 30px,#392411 40px,#be202f 40px,#be202f 50px); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: -webkit-repeating-linear-gradient(-45deg, #faae40 0px,#faae40 10px,#f05a28 10px,#f05a28 20px,#be202f 20px,#be202f 30px,#392411 30px,#392411 40px,#be202f 40px,#be202f 50px); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     background: repeating-linear-gradient(135deg, #faae40 0px,#faae40 10px,#f05a28 10px,#f05a28 20px,#be202f 20px,#be202f 30px,#392411 30px,#392411 40px,#be202f 40px,#be202f 50px); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     -webkit-background-clip: text;
     background-clip: text;
