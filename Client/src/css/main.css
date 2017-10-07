@@ -118,11 +118,27 @@ button {
 }
 
 .logoutButtonDiv {
-    margin-top: 1em;
+    padding: 0.1em;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    background: #faae40; /* Old browsers */
+    background: -moz-linear-gradient(-45deg, #faae40 1%, #faae40 14%, #f05a28 15%, #f05a28 28%, #be202f 29%, #be202f 43%, #392411 44%, #392411 58%, #be202f 59%, #be202f 73%, #f05a28 74%, #f05a28 88%, #faae40 89%, #faae40 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(-45deg, #faae40 1%,#faae40 14%,#f05a28 15%,#f05a28 28%,#be202f 29%,#be202f 43%,#392411 44%,#392411 58%,#be202f 59%,#be202f 73%,#f05a28 74%,#f05a28 88%,#faae40 89%,#faae40 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(135deg, #faae40 1%,#faae40 14%,#f05a28 15%,#f05a28 28%,#be202f 29%,#be202f 43%,#392411 44%,#392411 58%,#be202f 59%,#be202f 73%,#f05a28 74%,#f05a28 88%,#faae40 89%,#faae40 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#faae40', endColorstr='#faae40',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
 .logoutButton {
-
+    font-family: 'Monoton', cursive;
+    font-weight: 100;
+    font-size: 2em;
+    color: #FFFFFF;
+    text-align: center;
+    text-decoration: none;
+    background: transparent;
+    border: none;
+    outline: none;
 }
 
 .simpleButton {
@@ -148,9 +164,13 @@ button {
 
 .simpleButton:disabled {
     color: #949494;
-    background: #454545;
+    background: rgba(164, 185, 28, 0.5);
     pointer-events: none;
     cursor: default;
+}
+
+.simpleButton:active {
+    background: #cadf1c;
 }
 
 .graphContainerDiv {
