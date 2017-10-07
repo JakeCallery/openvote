@@ -181,7 +181,10 @@ h3 {
     display: flex;
     flex-direction: row;
     flex-flow: nowrap;
-    background-color: #ffe1b2;
+    background-color: #A47BA5;
+    margin-top: 0.5em;
+    border: solid;
+    border-color: black;
 }
 
 .graphLi:nth-child(odd){
@@ -205,7 +208,9 @@ h3 {
 
 
 .progressBarDiv {
-    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: 70%;
 }
 
@@ -230,8 +235,6 @@ h3 {
     text-align: center;
     font-size: 12px;
     line-height: 50px;
-    border-color: black;
-    border-width: thick;
     border-top-right-radius: 3em;
     border-bottom-right-radius: 3em;
     background-color: #8b995a;
@@ -289,7 +292,7 @@ button {
     padding: 0.1em;
     position: fixed;
     bottom: 0;
-    right: 0;
+    left: 0;
     background: #faae40; /* Old browsers */
     background: -moz-linear-gradient(-45deg, #faae40 1%, #faae40 14%, #f05a28 15%, #f05a28 28%, #be202f 29%, #be202f 43%, #392411 44%, #392411 58%, #be202f 59%, #be202f 73%, #f05a28 74%, #f05a28 88%, #faae40 89%, #faae40 100%); /* FF3.6-15 */
     background: -webkit-linear-gradient(-45deg, #faae40 1%,#faae40 14%,#f05a28 15%,#f05a28 28%,#be202f 29%,#be202f 43%,#392411 44%,#392411 58%,#be202f 59%,#be202f 73%,#f05a28 74%,#f05a28 88%,#faae40 89%,#faae40 100%); /* Chrome10-25,Safari5.1-6 */
@@ -355,6 +358,33 @@ button {
 }
 
 .voteButton {
+    font-family: 'Cabin', sans-serif;
+    font-weight: 100;
+    font-size: 1.2em;
+    border-radius: 8px;
+    background-color: #F05A28;
+    border: solid;
+    border-color: #FAAE40;
+    border-width: thick;
+    color: #fff9f2;
+    padding: 0.5em;
+    outline: none;
+}
 
+.voteButton:hover {
+    color: #FFFFFF;
+    background: #ff5817;
+}
+
+.voteButton:disabled {
+    color: #949494;
+    background: rgba(240, 90, 40, 0.42);
+    pointer-events: none;
+    cursor: default;
+}
+
+.voteButton:active {
+    background: #F05A28;
+    outline: none;
 }
 

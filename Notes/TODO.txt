@@ -5,6 +5,9 @@ Full Site Styling
   Style Login Page
   Style Unauthorized Page
 
+Add Bottom Ribbon
+  (always there, contains logout button, random messages?)
+
 Error Message (bottom ribbon)
 
 get new topics and vote counts on websocket reconnect
