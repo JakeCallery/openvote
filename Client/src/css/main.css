@@ -67,13 +67,13 @@ h3 {
 .pageTitleContainerDiv > h1 {
     text-align: center;
     font-family: 'Monoton', cursive;
-    font-size: 5em;
+    font-size: 100px;
     font-weight: 600;
     color: transparent;
     /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    background: -moz-linear-gradient(-45deg, #faae40 1%, #faae40 14%, #f05a28 15%, #f05a28 28%, #be202f 29%, #be202f 43%, #392411 44%, #392411 58%, #be202f 59%, #be202f 73%, #f05a28 74%, #f05a28 88%, #faae40 89%, #faae40 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(-45deg, #faae40 1%,#faae40 14%,#f05a28 15%,#f05a28 28%,#be202f 29%,#be202f 43%,#392411 44%,#392411 58%,#be202f 59%,#be202f 73%,#f05a28 74%,#f05a28 88%,#faae40 89%,#faae40 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(135deg, #faae40 1%,#faae40 14%,#f05a28 15%,#f05a28 28%,#be202f 29%,#be202f 43%,#392411 44%,#392411 58%,#be202f 59%,#be202f 73%,#f05a28 74%,#f05a28 88%,#faae40 89%,#faae40 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: -moz-linear-gradient(-45deg, #faae40 0%, #faae40 14%, #f05a28 15%, #f05a28 28%, #be202f 29%, #be202f 43%, #392411 44%, #392411 58%, #be202f 59%, #be202f 73%, #f05a28 74%, #f05a28 88%, #faae40 89%, #faae40 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(-45deg, #faae40 0%,#faae40 14%,#f05a28 15%,#f05a28 28%,#be202f 29%,#be202f 43%,#392411 44%,#392411 58%,#be202f 59%,#be202f 73%,#f05a28 74%,#f05a28 88%,#faae40 89%,#faae40 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(135deg, #faae40 0%,#faae40 14%,#f05a28 15%,#f05a28 28%,#be202f 29%,#be202f 43%,#392411 44%,#392411 58%,#be202f 59%,#be202f 73%,#f05a28 74%,#f05a28 88%,#faae40 89%,#faae40 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     -webkit-background-clip: text;
     background-clip: text;
 }
@@ -106,16 +106,16 @@ h3 {
 }
 
 .submitTopicButton {
+    height: 60px;
     font-family: 'Cabin', sans-serif;
     font-weight: 100;
-    font-size: 1.2em;
+    font-size: 25px;
     border-radius: 8px;
     background-color: #F05A28;
     border: solid;
     border-color: #FAAE40;
     border-width: thick;
     color: #fff9f2;
-    padding: 0.5em;
     outline: none;
 }
 
@@ -138,14 +138,14 @@ h3 {
 
 
 .submitTopicField {
-    height: 2.5em;
+    height: 50px;
     font-family: 'Cabin', sans-serif;
     font-weight: 100;
-    font-size: 1.2em;
+    font-size: 25px;
     border-radius: 8px;
-    background-color: #F05A28;
+    background-color: #392411;
     border: solid;
-    padding: 0 0.5em 0 0.5em;
+    padding: 0 10px 0 10px;
     border-color: #FAAE40;
     border-width: thick;
     color: #FFFFFF;
@@ -351,25 +351,43 @@ button {
 
 
 .voteButtonDiv {
+    margin: auto;
+    min-width: 80px;
+    width: 80px;
+    height: 80px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    background: #faae40; /* Old browsers */
+    background: -moz-linear-gradient(-45deg, #faae40 1%, #faae40 14%, #f05a28 15%, #f05a28 28%, #be202f 29%, #be202f 43%, #392411 44%, #392411 58%, #be202f 59%, #be202f 73%, #f05a28 74%, #f05a28 88%, #faae40 89%, #faae40 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(-45deg, #faae40 1%,#faae40 14%,#f05a28 15%,#f05a28 28%,#be202f 29%,#be202f 43%,#392411 44%,#392411 58%,#be202f 59%,#be202f 73%,#f05a28 74%,#f05a28 88%,#faae40 89%,#faae40 100%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(135deg, #faae40 1%,#faae40 14%,#f05a28 15%,#f05a28 28%,#be202f 29%,#be202f 43%,#392411 44%,#392411 58%,#be202f 59%,#be202f 73%,#f05a28 74%,#f05a28 88%,#faae40 89%,#faae40 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    border-radius: 10px;
-    padding: 5px;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#faae40', endColorstr='#faae40',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    border-radius: 50px;
+    border: solid;
+    border-color: #c94e0f;
+    border-width: thick;
+    padding: auto;
+}
+
+.voteButtonDiv:hover {
+    background: #FFFFFF;
 }
 
 .voteButton {
-
     font-family: 'Monoton', sans-serif;
     font-weight: 100;
     font-size: 1.5em;
-    background-color: #F05A28;
-    border-radius: 8px;
+    background-color: transparent;
     border: none;
-    color: #fff9f2;
+    color: #FFFFFF;
     outline: none;
+    text-align: center;
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
 }
+
 
 .voteButton:hover {
     color: #FFFFFF;

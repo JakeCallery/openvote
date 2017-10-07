@@ -186,7 +186,7 @@ class UIManager extends EventDispatcher {
         DOMUtils.addClass(voteButtonDiv, 'voteButtonDiv');
 
         let voteButton = this.doc.createElement('button');
-        DOMUtils.addClass(voteButton, 'simpleButton');
+        //DOMUtils.addClass(voteButton, 'simpleButton');
         DOMUtils.addClass(voteButton, 'voteButton');
         voteButton.innerHTML = 'Vote';
         voteButton.handleClick = ($evt) => {
