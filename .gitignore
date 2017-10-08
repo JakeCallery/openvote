@@ -4,11 +4,12 @@ node_modules
 .vagrant
 /webclient/dist
 /webserver/views/dist
+/Server/src/views/dist
+/dist
 *.avi
 *.ogg
 keys
 database
 certs
 *.retry
-dist
 Certs
