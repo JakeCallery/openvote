@@ -2,14 +2,12 @@
 node_modules
 *.pyc
 .vagrant
-/webclient/dist
-/webserver/views/dist
 /Server/src/views/dist
 /dist
 *.avi
 *.ogg
 keys
-database
+/Database
 certs
 *.retry
 Certs
