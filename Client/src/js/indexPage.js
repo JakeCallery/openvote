@@ -13,6 +13,7 @@ import Status from 'general/Status';
 import UIGEB from 'general/UIGEB';
 import TopicsDataModel from 'TopicsDataModel';
 import DOMUtils from 'jac/utils/DOMUtils';
+import BrowserUtils from 'jac/utils/BrowserUtils';
 
 //https://www.npmjs.com/package/sanitize-html
 import sanitizeHtml from 'sanitizeHtml/sanitize-html.min';
@@ -23,7 +24,13 @@ import '../css/main.css';
 
 l.addLogTarget(new ConsoleTarget());
 l.verboseFilter = (VerboseLevel.NORMAL | VerboseLevel.TIME | VerboseLevel.LEVEL);
-l.levelFilter = (LogLevel.DEBUG | LogLevel.INFO | LogLevel.WARNING | LogLevel.ERROR);
+l.levelFilter = (LogLevel.INFO | LogLevel.WARNING | LogLevel.ERROR);
+
+let urlParams = BrowserUtils.getURLParams(window);
+
+if(urlParams.hasOwnProperty('debug') && urlParams.debug === 'true'){
+    l.levelFilter = (LogLevel.DEBUG | LogLevel.INFO | LogLevel.WARNING | LogLevel.ERROR);
+}
 
 let topicsDM = new TopicsDataModel();
 

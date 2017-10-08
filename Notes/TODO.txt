@@ -1,8 +1,6 @@
 -- Planned --
 media query break / change header font weight
 
-enable client side debugging with query string
-
 deployment
   dos2unix on .sh scripts
   dos2unix on bash_profile
@@ -71,3 +69,5 @@ Sanitize serverside socket communication (ping hijack)
 limit topic submission length
 
 remove unneeded serverside logging
+
+enable client side debugging with query string

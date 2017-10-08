@@ -9,6 +9,7 @@ import WSManager from 'WSManager';
 import ReadyManager from 'ready/ReadyManager';
 import UIManager from 'UIManager';
 import DOMUtils from 'jac/utils/DOMUtils';
+import BrowserUtils from 'jac/utils/BrowserUtils';
 
 //Import through loaders
 import '../css/normalize.css';
@@ -16,7 +17,13 @@ import '../css/main.css';
 
 l.addLogTarget(new ConsoleTarget());
 l.verboseFilter = (VerboseLevel.NORMAL | VerboseLevel.TIME | VerboseLevel.LEVEL);
-l.levelFilter = (LogLevel.DEBUG | LogLevel.INFO | LogLevel.WARNING | LogLevel.ERROR);
+l.levelFilter = (LogLevel.INFO | LogLevel.WARNING | LogLevel.ERROR);
+
+let urlParams = BrowserUtils.getURLParams(window);
+
+if(urlParams.hasOwnProperty('debug') && urlParams.debug === 'true'){
+    l.levelFilter = (LogLevel.DEBUG | LogLevel.INFO | LogLevel.WARNING | LogLevel.ERROR);
+}
 
 let readyManager = new ReadyManager();
 readyManager.ready()
