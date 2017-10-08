@@ -71,4 +71,9 @@
         nvm alias default 6.9.2
       args:
         creates: /root/.nvm/alias
+
+    - name: NPM Install PM2
+      npm:
+        name: pm2
+        global: yes
 ...

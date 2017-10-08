@@ -1,0 +1,4 @@
+cd /openvote/Server/src
+pm2 start server.js
+pm2 startup systemd  (this sets it to restart on reboot)
+

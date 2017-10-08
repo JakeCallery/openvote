@@ -1,8 +1,6 @@
 -- Planned --
-deployment
-  dos2unix on .sh scripts
-  dos2unix on bash_profile
-  dos2unix on remoteScripts
+change root password for app node during deployment
+start pm2 as a "safe" user
 
 Create Constraints on DB (no duplicate topic/vote id's etc..)
 
@@ -72,3 +70,10 @@ remove unneeded serverside logging
 enable client side debugging with query string
 
 media query break / change header font weight
+
+deployment
+  dos2unix on .sh scripts
+  dos2unix on bash_profile
+  dos2unix on remoteScripts
+
+setup pm2
