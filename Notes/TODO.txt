@@ -1,6 +1,4 @@
 -- Planned --
-media query break / change header font weight
-
 deployment
   dos2unix on .sh scripts
   dos2unix on bash_profile
@@ -13,6 +11,7 @@ Nightly Backups (more than just nightly snapshot)
 
 
 -- Low Priority --
+slight shadown on vote button?
 Promise polyfill for IE9 (Do we even care?)
 Error Message (bottom ribbon)
 
@@ -71,3 +70,5 @@ limit topic submission length
 remove unneeded serverside logging
 
 enable client side debugging with query string
+
+media query break / change header font weight

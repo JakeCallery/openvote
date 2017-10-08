@@ -1,5 +1,6 @@
 html {
     height: 100%;
+    overflow-x: hidden;
 }
 
 html, body {
@@ -13,6 +14,7 @@ p {
     padding: 0;
     margin: 0;
 }
+
 
 body {
     box-sizing: border-box;
@@ -191,7 +193,7 @@ h3 {
     justify-content: center;
     flex-direction: column;
     background-color: transparent;
-    width: 80%;
+    width: 90%;
     padding: 0.5em;
     text-align: left;
     border-radius: 1em;
@@ -236,16 +238,13 @@ h3 {
 .graphContainerDiv {
     width: 100%;
     margin-bottom: 50px;
+    display: inline-block;
 }
-
-
 
 .progressBarDiv {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 70%;
-    margin-right: 25px;
 }
 
 .progressBarSpan {
@@ -385,7 +384,6 @@ button {
 
 
 .voteButtonDiv {
-    margin: auto;
     min-width: 80px;
     width: 80px;
     height: 80px;
@@ -405,6 +403,7 @@ button {
     margin-right: 20px;
     margin-left: 10px;
 }
+
 
 .voteButtonDiv:hover {
     background: #FAAE40;
@@ -463,4 +462,11 @@ button {
     -webkit-background-clip: text;
     background-clip: text;
 
+}
+
+
+@media screen and (min-resolution: 150dpi){
+    .pageTitleContainerDiv > h1 {
+        font-weight: 500;
+    }
 }
