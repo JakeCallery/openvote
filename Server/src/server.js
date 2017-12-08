@@ -70,8 +70,15 @@ if(process.env.development === 'true'){
     };
 }
 
+//Setup http server (for redirect to https)
+// Redirect from http port 80 to https
+http.createServer(function (req, res) {
+    console.log('Redirect');
+    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+    res.end();
+}).listen(8080);
 
-//Setup server
+//Setup https server
 const server = https.createServer(serverOptions, app);
 
 //Setup socket server
@@ -82,7 +89,7 @@ const wss = new WebSocket.Server({
 let clientsManager = new ClientsManager(wss);
 
 server.listen(8443, () => {
-    console.log('Listening on %d', server.address().port);
+    console.log('Listening on %s:%d', server.address().address, server.address().port);
 });
 
 //Server Setup
