@@ -1,4 +1,18 @@
 -- Planned --
+Automate the following during creation
+  create .well-known/acme-challenge directory
+  install certbot
+  copy over /usr/certbot directory
+  setup sym links to certs to target directory
+  (all of this for automatic auto renew with certbot renew)
+
+  Maybe just run create a script that runs:
+   certbot certonly --webroot -w /openvote/dist/ -d techvote.jakecallery.com
+   copy /etc/letsencrypt/live/techvote.jakecallery.com/privkey.pem to /openvote/Server/Certs/privkey.pem
+   copy /etc/letsencrypt/live/techvote.jakecallery.com/chain.pem to /openvote/Server/Certs/chain.pem
+   copy /etc/letsencrypt/live/techvote.jakecallery.com/fullchain.pem to /openvote/Server/Certs/fullchain.pem
+
+
 change root password for app node during deployment
 start pm2 as a "safe" user
 

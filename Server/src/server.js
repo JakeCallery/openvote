@@ -70,20 +70,6 @@ if(process.env.development === 'true'){
     };
 }
 
-//Setup http server (for redirect to https)
-// Redirect from http port 80 to https
-// http.createServer(function (req, res) {
-//     //console.log('Redirect');
-//     //res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
-//     //res.end();
-// }).listen(8080);
-
-// http.createServer();
-// http.listen(8080);
-// http.get('/.well-known/acme-challenge/', function(req,res){
-//
-// });
-
 let httpServer = express();
 httpServer.use(express.static(path.join(__dirname, 'views/dist')));
 httpServer.listen(8080, () => {
