@@ -72,11 +72,35 @@ if(process.env.development === 'true'){
 
 //Setup http server (for redirect to https)
 // Redirect from http port 80 to https
-http.createServer(function (req, res) {
-    console.log('Redirect');
-    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
-    res.end();
-}).listen(8080);
+// http.createServer(function (req, res) {
+//     //console.log('Redirect');
+//     //res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+//     //res.end();
+// }).listen(8080);
+
+// http.createServer();
+// http.listen(8080);
+// http.get('/.well-known/acme-challenge/', function(req,res){
+//
+// });
+
+let httpServer = express();
+httpServer.use(express.static(path.join(__dirname, 'views/dist')));
+httpServer.listen(8080, () => {
+    console.log('Http server listening on 8080');
+});
+
+httpServer.get('*', (req, res, next) => {
+    let path = url.parse(req.url).pathname;
+    if(!path.includes('.well-known/acme-challenge')){
+        console.log('Redirect');
+        res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+        res.end();
+    } else {
+        console.log('Serve Static');
+        next();
+    }
+});
 
 //Setup https server
 const server = https.createServer(serverOptions, app);
@@ -89,7 +113,7 @@ const wss = new WebSocket.Server({
 let clientsManager = new ClientsManager(wss);
 
 server.listen(8443, () => {
-    console.log('Listening on %s:%d', server.address().address, server.address().port);
+    console.log('Https Listening on %s:%d', server.address().address, server.address().port);
 });
 
 //Server Setup
