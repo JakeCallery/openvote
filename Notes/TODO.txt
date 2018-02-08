@@ -1,3 +1,7 @@
+-- High Priority --
+Add timestamps to error logs:
+https://stackoverflow.com/questions/21317852/how-to-add-dates-to-pm2-error-logs
+
 -- Planned --
 Automate the following during creation
   create .well-known/acme-challenge directory
